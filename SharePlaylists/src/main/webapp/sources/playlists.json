@@ -1,16 +1,12 @@
-// {
-//     "playlists" : [
-//       {
-//         "track_count" : "int",
-//         "playlist_title" : "string",
-//         "playlist_thumbnail" : "string",
-//         "songs" : [
-//           "song_name" : "string",
-//           "song_thumbnail" : "string",
-//           "song_author" : "string",
-//           "song_duration" : "string",
-//           "song_link" : "https://youtu.be/ofp_ffk0LM4?si=HX60J2c_DdkaSocg",
-//         ]
-//       }
-//     ]
-//   }
+{
+    "playlists" : [
+        {
+            "track_count" : "int",
+            "playlist_title" : "string",
+            "playlist_thumbnail" : "string",
+            "songs" : {
+                "song_id" : "string" 
+            }
+        }
+    ]
+}

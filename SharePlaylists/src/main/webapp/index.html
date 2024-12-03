@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>웹프 팀플</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>ì¹í íí</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
     <link  rel="stylesheet" href="playBar.css"></style>
 </head>
 <body>
     <header>
         <div class="left-menu">
-            <div><img src="logo.png" width="30" height="30" alt="로고">&nbsp;&nbsp;&nbsp;</div>
-            <a href="#explore" class="tab-header active" data-file="explore.html">둘러보기</a>
-            <a href="#my-workspace" class="tab-header" data-file="workspace/workspace.html">내 작업실</a>
+            <div><img src="logo.png" width="30" height="30" alt="ë¡ê³ ">&nbsp;&nbsp;&nbsp;</div>
+            <a href="#explore" class="tab-header active" data-file="explore.jsp">둘러보기</a>
+            <a href="#my-workspace" class="tab-header" data-file="workspace/workspace.jsp">내 작업실</a>
         </div>
         
         <div class="auth right-menu">
@@ -23,30 +23,30 @@
     </header>
 
     <main id="main-content">
-        <!-- 초기 로드될 콘텐츠 -->
+        <!--초기 로드될 콘텐츠-->
     </main>
 	<section class="player">
 	
-	<!-- 재생 바 -->
+	<!-- ì¬ì ë° -->
   	<article class="progress-bar">
     	<div class="progress" style="width: 90%;"></div>
   	</article>
   	
-	<!-- 컨트롤 버튼 -->
+	<!-- ì»¨í¸ë¡¤ ë²í¼ -->
 	<article class="playerBar">
 		<div style="width: 200px;">
-		<img src="thumnail.png" width="35" height="35" alt="썸네일">
+		<img src="thumnail.png" width="35" height="35" alt="ì¸ë¤ì¼">
 		&nbsp;Up (Karina Solo)
 		</div>
 		
 		<div class="controls">
-	    <button class="btn btn-prev">⏮</button>
-	    <button class="btn btn-play" id="playButton">▶</button>
-	    <button class="btn btn-next">⏭</button>
+	    <button class="btn btn-prev">â®</button>
+	    <button class="btn btn-play" id="playButton">â¶</button>
+	    <button class="btn btn-next">â­</button>
 	  	</div>
 	  	
 	  	<div style="width: 200px; text-align: right;">
-	  	<button class="btn btn-menu">▲</button>
+	  	<button class="btn btn-menu">â²</button>
 	  	</div>
 	</article>
 	
@@ -54,30 +54,15 @@
 	
     <script src="scripts.js"></script>
     <script src="playBar.js">
- 	// Play 버튼을 선택
-    // const playButton = document.getElementById("playButton");
-
-    // // 버튼 상태 토글 함수
-    // playButton.addEventListener("click", () => {
-    //   if (playButton.textContent === "▶") {
-    //     // Play 상태 -> Pause로 변경
-    //     playButton.textContent = "❚❚";
-    //     console.log("Play 상태");
-    //   } else {
-    //     // Pause 상태 -> Play로 변경
-    //     playButton.textContent = "▶";
-    //     console.log("Pause 상태");
-    //   }
-    // });
     </script>
 </body>
 <footer>
 	<div class="footer">
-    	<div><img src="logo.png" width="70" height="70" alt="로고">&nbsp;&nbsp;&nbsp;</div>
+    	<div><img src="logo.png" width="70" height="70" alt="ë¡ê³ ">&nbsp;&nbsp;&nbsp;</div>
     	<div>
-    	<p style="font-size: 10px;">팀명 : 화이팅 | 2024년도 2학기 웹프로그래밍 1분반 팀프로젝트 | 학수번호 : CSE2015-01 | 교수님 : 송양의 <br>
-		사용자들끼리 플레이리스트를 공유하고 음악에 대한 소통을 할 수 있는 공간을 제공하는 플랫폼</p>
-		<p style="color: #FF7F00; font-size: 10px;">팀장 : 차민우 | 팀원 : 공기훈, 오정인</p>
+    	<p style="font-size: 10px;">íëª : íì´í | 2024ëë 2íê¸° ì¹íë¡ê·¸ëë° 1ë¶ë° ííë¡ì í¸ | íìë²í¸ : CSE2015-01 | êµìë : ì¡ìì <br>
+		ì¬ì©ìë¤ë¼ë¦¬ íë ì´ë¦¬ì¤í¸ë¥¼ ê³µì íê³  ììì ëí ìíµì í  ì ìë ê³µê°ì ì ê³µíë íë«í¼</p>
+		<p style="color: #FF7F00; font-size: 10px;">íì¥ : ì°¨ë¯¼ì° | íì : ê³µê¸°í, ì¤ì ì¸</p>
 		</div>
   	</div>
     </footer>
