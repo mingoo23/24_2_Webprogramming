@@ -1,4 +1,4 @@
-/.metadata/
+/.metadata
 
 ### Eclipse ###
 .metadata
@@ -67,4 +67,3 @@ local.properties
 .sts4-cache/
 
 /Servers
-

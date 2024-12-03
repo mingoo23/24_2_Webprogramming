@@ -19,42 +19,165 @@
     color: #121212;
     cursor: pointer;
 }
-/* #my-playlists {
-    list-style: none;
-    margin: 1rem 0 0;
-    padding: 0;
-}
-#my-playlists li {
-    background: #1c1c1c;
-    margin: 0.5rem 0;
-    padding: 0.5rem;
-    border-radius: 5px;
-    text-align: center;
-} */
-/* .workspace .tab{
+
+
+/* workspace-수정 화면 섹션 */
+/* 스타일 적용 */
+.category {
+    font-size: 25px;
+  }
+  .td-container {
     display: flex;
-    justify-content: left;
-    align-items: center;
-    padding: 1rem;
-    background-color: #1c1c1c;
-}
-
-.workspace .tabmenu a {
-    margin-right: 1rem;
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.workspace .tabmenu a:hover {
-    background-color: #444;
-}
-
-.workspace .tabmenu a.active {
-    border-bottom: 2px solid #fff;
-}
-
-.workspace .content {
+    align-items: center; /* 세로 중앙 정렬 */
+    gap: 10px; /* 입력창 간격 */
+    justify-content: space-between;
+  }
+  .input-window {
+    width: 100%;
+    padding: 5px;
+    font-size: 22px;
+  }
+  
+  /* 완료 버튼 스타일 */
+  .button {
+    display: block;
+    width: 80px;
+    padding: 0;
+    margin: 10px 20px 10px 0;
+    font-weight: 600;
     text-align: center;
-    margin-top: 2rem;
-} */
+    line-height: 50px;
+    color: white;
+    border-radius: 15px;
+    transition: all 0.2s;
+    cursor: pointer; /* 커서 변경 */
+  }
+  
+  input[type="submit"] {
+    border: none; /* 기본 테두리 제거 */
+    outline: none; /* 포커스 시 나타나는 윤곽선 제거 */
+  }
+  
+  .btnOrange {
+    background: #ff7f00;
+  }
+  .btnOrange.btnPush {
+    box-shadow: 0px 5px 0px 0px #a66615;
+  }
+  .btnPush:hover {
+    margin-top: 15px;
+    margin-bottom: 5px;
+  }
+  .btnOrange.btnPush:hover {
+    box-shadow: 0px 0px 0px 0px #a66615;
+  }
+  
+  /* 추가 버튼 스타일 */
+  .plus-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* 버튼의 너비 */
+    height: 60px; /* 버튼의 높이 */
+    color: #808080; /* 텍스트 색상 */
+    border: 2px solid #808080; /* 테두리 색상 */
+    border-radius: 10px; /* 버튼 둥글게 만들기 */
+    cursor: pointer; /* 클릭할 수 있는 포인터 표시 */
+    transition: all 0.3s ease; /* 부드러운 전환 효과 */
+  }
+  
+  .plus-button .icon {
+    font-size: 30px; /* 아이콘 크기 */
+  }
+  
+  .plus-button:hover {
+    border-color: #aaa; /* 테두리 색 변경 */
+    color: #aaa; /* 텍스트 색상 변경 */
+  }
+  
+  .plus-button:active {
+    background-color: #222; /* 클릭 시 배경 어둡게 */
+  }
+  
+  /* 삭제 버튼 스타일 */
+  .delete-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px; /* 버튼의 너비 */
+    height: 60px; /* 버튼의 높이 */
+    color: #808080; /* 텍스트 색상 */
+    border: 2px solid #808080; /* 테두리 색상 */
+    border-radius: 10px; /* 버튼 둥글게 만들기 */
+    cursor: pointer; /* 클릭할 수 있는 포인터 표시 */
+    transition: all 0.3s ease; /* 부드러운 전환 효과 */
+  }
+  
+  .delete-button .icon {
+    font-size: 30px; /* 아이콘 크기 */
+  }
+  
+  .delete-button:hover {
+    border-color: #aaa; /* 테두리 색 변경 */
+    color: #aaa; /* 텍스트 색상 변경 */
+  }
+  
+  .delete-button:active {
+    background-color: #222; /* 클릭 시 배경 어둡게 */
+  }
+  
+  /* 탭 스타일 */
+  .tab-content {
+    display: none; /*기본적으로 숨김 */
+  }
+  
+  .tab-content.active {
+    display: block; /* 활성화된 탭만 표시 */
+  }
+  
+  .workspace-tab {
+    display: flex;
+    border-bottom: 1px solid #333;
+    padding: 10px 0;
+    font-size: medium;
+  }
+  
+  .workspace-header {
+    color: #666;
+    text-decoration: none;
+    font-weight: 400;
+    margin: 0 20px;
+    position: relative;
+    padding: 10px;
+  }
+  
+  .workspace-header.active {
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .workspace-header.active::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #fff;
+    margin: auto;
+  }
+  
+  /* 노래 리스트 스타일 */
+  .thumnail-container {
+    display: flex;
+    align-items: center; /* 세로 중앙 정렬 */
+    gap: 10px; /* 입력창 간격 */
+    justify-content: left;
+  }
+  .singer-container {
+    display: flex;
+    align-items: center; /* 세로 중앙 정렬 */
+    gap: 10px; /* 입력창 간격 */
+    justify-content: right;
+  }
+  
