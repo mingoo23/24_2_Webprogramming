@@ -53,6 +53,7 @@ header .menu-btn {
    /* display: none;  메뉴버튼은 필요 없으면 숨김 */
 }
 
+
 /* 모바일 등 작은 화면에서는 메뉴 버튼 나오게 처리 */
 @media (max-width: 768px) {
     header {
@@ -161,55 +162,9 @@ h2 {
     padding: 0.5rem;
 }
 
-
-/* workspace(내 작업실) 섹션 */
-
-#add-playlist-btn {
-    margin-top: 1rem;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    border: none;
-    border-radius: 5px;
-    background-color: #ff9800;
-    color: #121212;
-    cursor: pointer;
-}
-/* #my-playlists {
-    list-style: none;
-    margin: 1rem 0 0;
-    padding: 0;
-}
-#my-playlists li {
-    background: #1c1c1c;
-    margin: 0.5rem 0;
-    padding: 0.5rem;
-    border-radius: 5px;
-    text-align: center;
-} */
-.workspace .tab{
-    display: flex;
-    justify-content: left;
+.footer {
+    display: flex;  /* 자식 요소들을 가로로 배치 */
     align-items: center;
-    padding: 1rem;
-    background-color: #1c1c1c;
-}
-
-.workspace .tabmenu a {
-    margin-right: 1rem;
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.workspace .tabmenu a:hover {
-    background-color: #444;
-}
-
-.workspace .tabmenu a.active {
-    border-bottom: 2px solid #fff;
-}
-
-.workspace .content {
+    justify-content: center;
     text-align: center;
-    margin-top: 2rem;
 }
