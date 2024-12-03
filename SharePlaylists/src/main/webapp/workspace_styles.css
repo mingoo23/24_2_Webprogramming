@@ -1,0 +1,60 @@
+.workspace-content {
+    display: none; /*기본적으로 숨김 */
+}
+
+.workspace-content.active {
+    display: block; /* 활성화된 탭만 표시 */
+}
+
+
+/* workspace(내 작업실) 섹션 */
+
+#add-playlist-btn {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff9800;
+    color: #121212;
+    cursor: pointer;
+}
+/* #my-playlists {
+    list-style: none;
+    margin: 1rem 0 0;
+    padding: 0;
+}
+#my-playlists li {
+    background: #1c1c1c;
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    border-radius: 5px;
+    text-align: center;
+} */
+/* .workspace .tab{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 1rem;
+    background-color: #1c1c1c;
+}
+
+.workspace .tabmenu a {
+    margin-right: 1rem;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.workspace .tabmenu a:hover {
+    background-color: #444;
+}
+
+.workspace .tabmenu a.active {
+    border-bottom: 2px solid #fff;
+}
+
+.workspace .content {
+    text-align: center;
+    margin-top: 2rem;
+} */

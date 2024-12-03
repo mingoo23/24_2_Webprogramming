@@ -1,4 +1,4 @@
-/* 공통 스타일 */
+/* 공통부분 스타일 */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -53,6 +53,7 @@ header .menu-btn {
    /* display: none;  메뉴버튼은 필요 없으면 숨김 */
 }
 
+
 /* 모바일 등 작은 화면에서는 메뉴 버튼 나오게 처리 */
 @media (max-width: 768px) {
     header {
@@ -94,7 +95,7 @@ h2 {
 
 /* 탭 콘텐츠 스타일 */
 .tab-content {
-    /*display: none;  기본적으로 숨김 */
+    display: none; /*기본적으로 숨김 */
 }
 
 .tab-content.active {
@@ -161,33 +162,9 @@ h2 {
     padding: 0.5rem;
 }
 
-/* 내 작업실 섹션 */
-.workspace-content {
-    text-align: center;
-    margin-top: 2rem;
-}
-
-#add-playlist-btn {
-    margin-top: 1rem;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    border: none;
-    border-radius: 5px;
-    background-color: #ff9800;
-    color: #121212;
-    cursor: pointer;
-}
-
-#my-playlists {
-    list-style: none;
-    margin: 1rem 0 0;
-    padding: 0;
-}
-
-#my-playlists li {
-    background: #1c1c1c;
-    margin: 0.5rem 0;
-    padding: 0.5rem;
-    border-radius: 5px;
+.footer {
+    display: flex;  /* 자식 요소들을 가로로 배치 */
+    align-items: center;
+    justify-content: center;
     text-align: center;
 }
