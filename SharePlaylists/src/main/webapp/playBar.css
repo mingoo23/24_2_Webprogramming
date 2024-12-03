@@ -1,0 +1,59 @@
+/* 재생바 스타일 */
+.player {
+  display: flex;
+  flex-direction: column; /* 수직 방향으로 정렬 */
+align-items: center;
+justify-content: center;
+width: 98%;
+margin: 0 auto;
+padding: 10px;
+color: #fff;
+border-radius: 10px;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+position: absolute;
+bottom: 0;
+}
+
+.progress-bar {
+width: 100%; /* 부모의 너비에 맞춤 */
+height: 8px;
+background-color: #444;
+border-radius: 4px;
+margin-bottom: 15px; /* 버튼과의 간격 */
+overflow: hidden;
+position: relative;
+}
+
+.progress {
+height: 100%;
+background-color: #FF7F00;
+transition: width 0.3s;
+}
+
+/* 버튼 스타일 */
+.controls {
+display: flex;
+align-items: center;
+justify-content: center; /* 중앙 정렬 */
+gap: 10px;
+}
+
+.btn {
+background: none;
+border: none;
+color: #FF7F00;
+font-size: 1.5rem;
+cursor: pointer;
+transition: transform 0.2s;
+}
+
+.btn:hover {
+transform: scale(1.2);
+}
+
+.playerBar{
+display: flex;
+justify-content: space-between;
+align-items: center; /* 세로 정렬을 위한 선택 (중앙 정렬) */
+width: 100%; /* 부모 컨테이너 너비를 기준으로 배치 */
+}
