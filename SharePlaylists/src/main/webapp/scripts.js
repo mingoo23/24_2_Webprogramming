@@ -24,6 +24,9 @@ $(document).ready(function () {
         if (cache[file]) {
             console.log(`캐시에서 로드: ${file}`);
             $("#main-content").html(cache[file]);
+            
+            // 기존 콘텐츠를 비활성화하고 새 콘텐츠 삽입
+            $("#main-content").empty().html(cache[file]).find(".tab-content").addClass("active");
         } else {
             // AJAX 요청으로 데이터 가져오기
             console.log(`서버에서 로드: ${file}`);
@@ -31,6 +34,8 @@ $(document).ready(function () {
                 if (status === "success") {
                     // 성공적으로 로드하면 캐시에 저장
                     cache[file] = response;
+                    // 기존 콘텐츠를 비활성화하고 새 콘텐츠 삽입
+                    $("#main-content").empty().html(response).find(".tab-content").addClass("active");
                 } else if (status === "error") {
                     console.error("콘텐츠를 로드하는 중 오류 발생:", xhr.status, xhr.statusText);
                     $("#main-content").html("<p>콘텐츠를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.</p>");

@@ -1,0 +1,15 @@
+{
+  "playlists": [
+    {
+      "track_count": "int",
+      "playlist_title": "string",
+      "playlist_thumbnail": "string",
+      "songs": {
+        "song_name": "string",
+        "song_thumbnail": "string",
+        "song_author": "string",
+        "song_duration": "string"
+      }
+    }
+  ]
+}
