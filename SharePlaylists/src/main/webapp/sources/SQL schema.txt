@@ -1,0 +1,18 @@
+CREATE DATABASE IF NOT EXISTS MusicApp;
+USE MusicApp;
+
+-- playlists 테이블 생성
+CREATE TABLE playlists (
+    playlist_id INT AUTO_INCREMENT PRIMARY KEY, -- 각 플레이리스트를 고유하게 식별하는 ID
+    playlist_title VARCHAR(255) NOT NULL,      -- 플레이리스트 제목
+    playlist_thumbnail VARCHAR(2083),          -- 썸네일 URL (최대 URL 길이)
+    track_count INT NOT NULL                   -- 트랙 수
+);
+
+-- songs 테이블 생성
+CREATE TABLE songs (
+    song_id VARCHAR(255) PRIMARY KEY,          -- 고유한 곡 ID
+    playlist_id INT,                           -- 연관된 플레이리스트 ID
+    FOREIGN KEY (playlist_id) REFERENCES playlists(playlist_id)
+    ON DELETE CASCADE                          -- 플레이리스트 삭제 시 관련 곡도 삭제
+);
