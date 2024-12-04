@@ -6,7 +6,9 @@
     <title>웹프로그래밍 프로젝트</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="styles.css">
-    <link  rel="stylesheet" href="playBar.css"></style>
+    <link  rel="stylesheet" href="playBar.css">
+	<link rel="stylesheet" href="youtube.css" />
+	</style>
 </head>
 <body>
     <header>
@@ -42,12 +44,14 @@
 		<div class="controls">
 	    <button class="btn btn-prev">⏮</button>
 	    <button class="btn btn-play" id="playButton">▶</button>
-	    <button class="btn btn-next">⏭</button>
+	    <button class="btn btn-next" id="nextBtn">⏭</button>
 	  	</div>
 	  	
 	  	<div style="width: 200px; text-align: right;">
-	  	<button class="btn btn-menu">▲</button>
+		<button class="btn btn-menu tab-header" data-file="currentPlay.html">▲</button>
 	  	</div>
+		  <!-- <script src="https://www.youtube.com/iframe_api"></script> -->
+		  <script src="youtube.js"></script>
 	</article>
 	
 	</section>

@@ -1,7 +1,7 @@
-const playButton = document.getElementById("playButton");
+// 버튼 상태를 토글하는 함수
+function togglePlayButton() {
+  const playButton = document.getElementById("playPauseBtn"); // 버튼 객체 가져오기
 
-// 버튼 상태 토글 함수
-playButton.addEventListener("click", () => {
   if (playButton.textContent === "▶") {
     // Play 상태 -> Pause로 변경
     playButton.textContent = "❚❚";
@@ -11,4 +11,4 @@ playButton.addEventListener("click", () => {
     playButton.textContent = "▶";
     console.log("Pause 상태");
   }
-});
+}

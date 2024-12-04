@@ -1,167 +1,167 @@
 /* 공통부분 스타일 */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #121212;
-    color: #fff;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #121212;
+  color: #fff;
 }
 
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    background-color: #1c1c1c;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #1c1c1c;
 }
 
 header .logo {
-    font-size: 1.5rem;
-    margin-right: 1rem;
+  font-size: 1.5rem;
+  margin-right: 1rem;
 }
 
 header .left-menu,
 header .right-menu {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 header .left-menu a {
-    margin-right: 1rem;
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
+  margin-right: 1rem;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 header .left-menu a.active {
-    border-bottom: 2px solid #fff;
+  border-bottom: 2px solid #fff;
 }
 
 header .auth a {
-    margin-left: 1rem;
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
+  margin-left: 1rem;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 header .menu-btn {
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 1.5rem;
-    cursor: pointer;
-   /* display: none;  메뉴버튼은 필요 없으면 숨김 */
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  /* display: none;  메뉴버튼은 필요 없으면 숨김 */
 }
-
 
 /* 모바일 등 작은 화면에서는 메뉴 버튼 나오게 처리 */
 @media (max-width: 768px) {
-    header {
-        flex-wrap: wrap;
-    }
+  header {
+    flex-wrap: wrap;
+  }
 
-    .left-menu {
-        display: none;
-    }
+  .left-menu {
+    display: none;
+  }
 
-    .menu-btn {
-        display: block;
-    }
+  .menu-btn {
+    display: block;
+  }
 
-    .menu-btn.active + .left-menu {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-    }
+  .menu-btn.active + .left-menu {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
 
-    .auth {
-        margin-top: 0.5rem;
-    }
+  .auth {
+    margin-top: 0.5rem;
+  }
 }
-
 
 main {
-    /* padding: 2rem; */
+  /* padding: 2rem; */
 }
 
+#main-content {
+}
 
 h2 {
-    margin-top: 1rem;
-    font-size: 1.5rem;
+  margin-top: 1rem;
+  font-size: 1.5rem;
 }
 
 /* 탭 콘텐츠 스타일 */
 .tab-content {
-    display: none; /*기본적으로 숨김 */
+  display: none; /*기본적으로 숨김 */
 }
 
 .tab-content.active {
-    display: block; /* 활성화된 탭만 표시 */
+  display: block; /* 활성화된 탭만 표시 */
 }
 
 /* 둘러보기 섹션 */
 .filter-section {
-    margin-top: 1rem;
-    text-align: center;
+  margin-top: 1rem;
+  text-align: center;
 }
 
 .filter-btn {
-    margin: 0 0.5rem;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    border: 1px solid #fff;
-    border-radius: 5px;
-    background-color: transparent;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  margin: 0 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  background-color: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .filter-btn.active {
-    background-color: #fff;
-    color: #121212;
+  background-color: #fff;
+  color: #121212;
 }
 
 .filter-btn:hover {
-    background-color: #444;
+  background-color: #444;
 }
 
 .playlist-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    margin-top: 2rem;
-    padding: 0 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+  padding: 0 1rem;
 }
 
 .playlist-item {
-    background: #1c1c1c;
-    border-radius: 8px;
-    overflow: hidden;
-    text-align: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  background: #1c1c1c;
+  border-radius: 8px;
+  overflow: hidden;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .playlist-item img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
 }
 
 .playlist-item h3 {
-    padding: 0.5rem;
-    font-size: 1rem;
+  padding: 0.5rem;
+  font-size: 1rem;
 }
 
 .playlist-item p {
-    font-size: 0.875rem;
-    color: #ccc;
-    padding: 0.5rem;
+  font-size: 0.875rem;
+  color: #ccc;
+  padding: 0.5rem;
 }
 
 .footer {
-    display: flex;  /* 자식 요소들을 가로로 배치 */
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+  display: flex; /* 자식 요소들을 가로로 배치 */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
