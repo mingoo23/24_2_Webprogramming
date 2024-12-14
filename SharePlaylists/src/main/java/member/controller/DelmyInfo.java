@@ -49,7 +49,7 @@ public class DelmyInfo extends HttpServlet {
         System.out.println("디버깅중: ID=" + id);
 
         // 삭제 완료 후 메인 페이지로 이동
-        response.sendRedirect("/SharePlaylists/login.jsp");
+        response.sendRedirect("/SharePlaylists/home.jsp");
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class DelmyInfo extends HttpServlet {
         boolean isDeleted = service.delMember(id);
 
         if (isDeleted) {
-            response.sendRedirect("/SharePlaylists/login.jsp?message=탈퇴가 완료되었습니다.");
+            response.sendRedirect("/SharePlaylists/home.jsp?message=탈퇴가 완료되었습니다.");
         } else {
             response.sendRedirect("/SharePlaylists/Error.jsp?message=탈퇴에 실패했습니다.");
         }

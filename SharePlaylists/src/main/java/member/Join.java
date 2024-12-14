@@ -74,7 +74,7 @@ public class Join extends HttpServlet {
 	
 		
 		// redirect 는 외부에서 접근하기 때문에 /SharePlaylists/ 필요함 
-		response.sendRedirect("/SharePlaylists/login.jsp");
+		response.sendRedirect("/SharePlaylists/home.jsp");
 		
 	}
 }

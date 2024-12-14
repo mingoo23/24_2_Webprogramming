@@ -10,7 +10,10 @@
 	<h3>webProg</h3>
 	<!-- 링크 이동은 get 방식 => doGet 실행 -->
 	<!-- "Servlet 주소" -->
-	
+
+	<!-- 1. 로그인 -->
+	<a href="/SharePlaylists/Login">로그인</a><br/>
+		
 	<!-- 2. 회원가입 -->
 	<a href="/SharePlaylists/Join">회원가입</a><br/>
 	
