@@ -16,3 +16,12 @@ CREATE TABLE songs (
     FOREIGN KEY (playlist_id) REFERENCES playlists(playlist_id)
     ON DELETE CASCADE                          -- 플레이리스트 삭제 시 관련 곡도 삭제
 );
+
+-- login 
+CREATE TABLE users (
+    id VARCHAR(50) NOT NULL PRIMARY KEY, -- 사용자 ID (Primary Key)
+    password VARCHAR(255) NOT NULL,      -- 비밀번호
+    username VARCHAR(50) NOT NULL UNIQUE, -- 사용자 이름 (Unique)
+    email VARCHAR(100),                  -- 이메일 (Optional)
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- 생성 시간 (Default: 현재 시간)
+);
