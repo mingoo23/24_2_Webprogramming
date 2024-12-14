@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!-- 내 작업실 - 듣기 화면 -->
 <div id="workspace-edit" class="workspace-tab-content">
 
