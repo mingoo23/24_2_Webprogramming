@@ -4,21 +4,50 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>로그인</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .table-wrapper {
+    border: 2px solid #808080;
+    border-radius: 10px;
+    padding: 20px; /* 안쪽 여백 */
+    width: 400px;
+    margin: 0 auto;
+  }
+
+  .table-wrapper table {
+    width: 100%; /* 테이블이 감싸는 div에 맞게 */
+    border-collapse: collapse; /* 테이블 셀 경계 */
+  }
+
+  .table-wrapper th, .table-wrapper td {
+    padding: 10px; /* 셀 안쪽 여백 */
+    text-align: left; /* 텍스트 정렬 */
+  }
+</style>
 </head>
 <body>
-	<h3>webProg</h3>
-	<!-- 링크 이동은 get 방식 => doGet 실행 -->
-	<!-- "Servlet 주소" -->
-	
-	<!-- 2. 회원가입 -->
-	<a href="/SharePlaylists/Join">회원가입</a><br/>
-	
-	<!-- 3. id 검색 -->
+	<center><h1>로그인</h1></center>
+
 	<form action="/SharePlaylists/MyInfo" method="post">
-		검색할 id:<input type="text" name="id">
-		<input type="submit" value = "검색"> 
+		<div class="table-wrapper">
+			<table>
+				<tr>
+					<th>ID</th>
+					<td><input type="text" name="id"></td>
+				</tr>
+				<tr>
+					<th>PASSWORD</th>
+					<td><input type="password" name="psw"></td>
+					<td><input type="submit" value="로그인"></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<a href="<%= request.getContextPath() %>/member/join.jsp">회원가입</a>
+					</td>
+				</tr>
+			</table>
+		</div>
 	</form>
-	
 </body>
 </html>
