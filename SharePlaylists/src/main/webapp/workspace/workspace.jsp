@@ -10,7 +10,6 @@
     <a href="#workspace-social" class="workspace-header" data-file="./workspace/workspace_social.html" >친구</a
     >
   </div>
-  <button id="clear-cache-btn">캐시 초기화</button>
 
   <div id="workspace-content">
   </div>
