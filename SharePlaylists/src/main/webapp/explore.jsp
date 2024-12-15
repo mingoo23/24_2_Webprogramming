@@ -1,4 +1,5 @@
 <%@page import="com.mysql.cj.protocol.ResultsetRowsOwner"%>
+<link rel="stylesheet" href="./workspace/workspace_styles.css" />
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
@@ -26,7 +27,10 @@
 	
 	rs.last();
 	rs.beforeFirst();
+
+	%>
 	
+	<%
 	//플레이리스트 전부 출력하도록
 	while(rs.next()){
 		//playlist_id는 순서대로 플레이리스트 번호이므로
@@ -36,14 +40,16 @@
 		int track_count = Integer.parseInt(rs.getString("track_count"));
 	
 	%>
-    <div class="playlist-grid">
-		<img alt="썸네일 없음" src="<%=rs.getString("playlist_thumbnail") %>">
-		
-		<p><%=track_count%></p>
-		<p><%=playlist_title %></p>
-    </div>
+		<div class="playlist-card">
+        	<div class="thumbnail">
+            	<img src="<%=playlist_thumbnail %>" alt="썸네일 없음" />
+            </div>
+            <div class="card-content">
+                <div class="title"><%= playlist_title %></div>
+    	        <div class="track-count"><%= track_count%></div>
+            </div>
+		</div>
     <%
-    playlist_id--;//필요한지 모르겠음
 	}
     %>
 </section>
