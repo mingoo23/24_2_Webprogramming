@@ -4,19 +4,37 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원가입</title>
+<link rel="stylesheet" href="./member_styles.css" />
 </head>
 <body>
-	<h3>회원가입</h3>
+	<div>
+	<br>
+	<input type="button" value="뒤로 가기" onclick="history.back();">
+	</div>
+	<center><h1>회원가입</h1></center>
 	<form action="/SharePlaylists/Join" method="post">
-		<table border="1">
-				<tr><th>ID</th><td><input type="text" name="id"></td></tr>
-				<tr><th>PWD</th><td><input type="password" name="pwd"></td></tr>
-				<tr><th>NAME</th><td><input type="text" name="username"></td></tr>
-				<tr><th>EMAIL</th><td><input type="text" name="email"></td></tr>
-				<tr><th>가입</th><td><input type="submit" value="가입"></td></tr>
+	<div class="table-wrapper">
+		<table border="0" align="center">
+				<tr>
+					<th>ID</th>
+					<td><input type="text" name="id" class="input-window"></td>
+				</tr>
+				<tr>
+					<th>PASSWORD</th>
+					<td><input type="password" name="pwd" class="input-window"></td>
+				</tr>
+				<tr>
+					<th>NAME</th>
+					<td><input type="text" name="username" class="input-window"></td>
+				</tr>
+				<tr>
+					<th>EMAIL</th>
+					<td><input type="text" name="email" class="input-window"></td>
+					<td><input type="submit" value="가입" class="button btnPush btnOrange"></td>
+				</tr>
 		</table>
-
+	</div>
 	</form>
 </body>
 </html>
