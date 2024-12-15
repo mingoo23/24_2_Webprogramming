@@ -6,8 +6,10 @@ import java.sql.SQLException;
 
 // 싱글톤
 public class DBConnect {
+
     private static DBConnect dbconn = new DBConnect();
-    private String url = "jdbc:mysql://localhost:3306/MusicApp?serverTimezone=UTC";
+    private String url = "jdbc:mysql://localhost:3306/playlists?serverTimezone=UTC";
+    //private String url = "jdbc:mysql://localhost:3306/MusicApp?serverTimezone=UTC";
     private String username = "root"; // MySQL 사용자 이름
     private String password = "0000"; // MySQL 비밀번호
 
