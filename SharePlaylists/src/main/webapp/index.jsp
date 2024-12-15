@@ -19,7 +19,7 @@
         </div>
         
         <div class="auth right-menu">
-            <a href="#">로그인</a> <a href="#">회원가입</a>
+            <a href="login.jsp">로그인</a> <a href="#">회원가입</a>
             <button class="menu-btn">&nbsp;☰&nbsp;</button>
         </div>
     </header>

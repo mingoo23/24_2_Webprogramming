@@ -1,3 +1,4 @@
+//내 작업실 - 탭 이동 처리
 $(document).ready(function () {
   const cache = {}; // 데이터를 저장할 캐시 객체
 
