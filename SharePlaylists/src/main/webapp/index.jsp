@@ -19,7 +19,7 @@
         </div>
         
         <div class="auth right-menu">
-            <a href="login.jsp">로그인</a> <a href="<%= request.getContextPath() %>/member/join.jsp">회원가입</a>
+            <a href="<%= request.getContextPath() %>/member/login.jsp">로그인</a> <a href="<%= request.getContextPath() %>/member/join.jsp">회원가입</a>
             <button class="menu-btn">&nbsp;☰&nbsp;</button>
         </div>
     </header>
