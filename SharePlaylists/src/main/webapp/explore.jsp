@@ -1,4 +1,4 @@
-<%@page import="com.mysql.cj.protocol.ResultsetRowsOwner"%>
+
 <link rel="stylesheet" href="./workspace/workspace_styles.css" />
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>

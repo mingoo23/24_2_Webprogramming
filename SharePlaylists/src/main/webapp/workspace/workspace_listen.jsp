@@ -1,18 +1,9 @@
 <%@ page import="java.util.List, playlist.Playlist" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>내 작업실 - 듣기</title>
-    <style>
-        /* 플레이리스트 항목 스타일 */
-        #my-playlists { list-style-type: none; padding: 0; }
-        .playlist-item { margin: 10px 0; }
-        .playlist-item img { width: 50px; height: 50px; margin-right: 10px; }
-    </style>
-</head>
-<body>
-<div id="workspace-edit">
+<link rel="stylesheet" href="./workspace/workspace_styles.css" />
+
+<section id="workspace-listen" class="workspace-tab-content">
+<div align="center">
     <h1>내 플레이리스트</h1>
     
   
@@ -49,5 +40,4 @@
         %>
     </ul>
 </div>
-</body>
-</html>
+</section>
