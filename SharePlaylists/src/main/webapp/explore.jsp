@@ -39,7 +39,8 @@
 	
     <%
             }
-        } else {
+        } 
+        else {
             out.println("<p>플레이리스트가 존재하지 않습니다.</p>");
         }
     } catch (Exception e) {
