@@ -7,76 +7,58 @@
     <div align="center">
         <!-- '새 플레이리스트 추가' 버튼 -->
         <button id="add-playlist-btn">새 플레이리스트 추가</button>
-        
-        <!-- AJAX 요청 결과가 로드될 영역 -->
-        <div id="create-playlist-content" style="display: none; margin-top: 20px;"></div>
-        
-        <%
-            Connection conn = null;
-            Statement stmt = null;
-            ResultSet rs = null;
-            try {
-                Class.forName("com.mysql.jdbc.Driver");
-                String jdbcUrl = "jdbc:mysql://localhost:3306/playlists?useUnicode=true&characterEncoding=utf8";
-                conn = DriverManager.getConnection(jdbcUrl, "root", "0000");
-                stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-                // playlist 테이블에서 플레이리스트 모두 가져옴
-                String sql = "SELECT * FROM playlist ORDER BY playlist_id ASC";
-                rs = stmt.executeQuery(sql);
-            } catch (Exception e) {
-                out.println("DB 연동 오류입니다.: " + e.getMessage());
-            }
+    </div>
+    <!-- 플레이리스트 생성 폼을 위한 컨테이너 -->
+    <div id="create-playlist-content">
+    <h1>새 플레이리스트 추가</h1>
 
-            rs.last();
-            rs.beforeFirst();
-        %>
-
-        <% 
-            // 플레이리스트 전부 출력하도록
-            while (rs.next()) {
-                // playlist_id는 순서대로 플레이리스트 번호이므로
-                int playlist_id = rs.getRow();
-                String playlist_title = rs.getString("playlist_title");
-                String playlist_thumbnail = rs.getString("playlist_thumbnail");
-                int track_count = Integer.parseInt(rs.getString("track_count"));
-        %>
-                <div class="playlist-card">
-                    <div class="thumbnail">
-                        <img src="<%= playlist_thumbnail %>" alt="썸네일 없음" />
-                    </div>
-                    <div class="card-content">
-                        <div class="title"><%= playlist_title %></div>
-                        <div class="track-count"><%= track_count %></div>
-                    </div>
-                </div>
-        <%
-            }
-        %>
+    <!-- 플레이리스트 생성 폼 -->
+    <form action="${pageContext.request.contextPath}/PlaylistCreateServlet" method="post">
+        <div>
+            <label for="title">Playlist 이름:</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+        <div>
+            <label for="youtubeLink">YouTube 링크 추가:</label>
+            <input type="text" id="youtubeLink" placeholder="YouTube 링크를 입력하세요">
+            <button type="button" onclick="addYouTubeLink()">추가</button>
+        </div>
+        <div>
+            <h3>추가된 링크 목록:</h3>
+            <ul id="linkList">
+                <!-- 링크가 여기에 추가됩니다 -->
+            </ul>
+        </div>
+        <div>
+            <input type="hidden" name="trackCount" id="trackCount" value="0">
+            <button type="submit">플레이리스트 생성</button>
+        </div>
+    </form>
+    
     </div>
 </section>
 
-<script>
-// JavaScript for dynamically loading the create playlist page
-document.getElementById('add-playlist-btn').addEventListener('click', function() {
-    const contentDiv = document.getElementById('create-playlist-content');
-    
-    // AJAX request to fetch the JSP content
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', './workspace/workspace_createplaylist.jsp', true);
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            contentDiv.style.display = 'block'; // Show the content div
-            contentDiv.innerHTML = xhr.responseText; // Insert the JSP content
-        } else {
-            contentDiv.innerHTML = '<p>페이지를 로드할 수 없습니다. 다시 시도하세요.</p>';
-        }
-    };
-    xhr.onerror = function() {
-        contentDiv.innerHTML = '<p>요청 중 오류가 발생했습니다.</p>';
-    };
-    xhr.send(); // Send the AJAX request
-});
 
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+    $("#add-playlist-btn").click(function() {
+        $.ajax({
+            url: "togglePlaylistForm",  // 서버의 엔드포인트 URL
+            type: "POST",
+            data: { isVisible: $("#create-playlist-content").is(":visible") },
+            success: function(response) {
+                if (response.success) {
+                    $("#create-playlist-content").toggle();
+                }
+            },
+            error: function() {
+                console.error("플레이리스트 폼 토글 중 오류가 발생했습니다.");
+            }
+        });
+    });
+});
 function addYouTubeLink() {
     const inputField = document.getElementById("youtubeLink");
     const link = inputField.value.trim();
@@ -102,5 +84,10 @@ function addYouTubeLink() {
 
     // 입력 필드 초기화
     inputField.value = "";
+
+    // trackCount 업데이트
+    const trackCountInput = document.getElementById("trackCount");
+    trackCountInput.value = parseInt(trackCountInput.value) + 1;
 }
 </script>
+
