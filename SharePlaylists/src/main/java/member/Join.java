@@ -61,6 +61,9 @@ public class Join extends HttpServlet {
 	    String email = request.getParameter("email");
 
 	    System.out.println("Received data: id=" + id + ", pwd=" + pwd + ", username=" + username + ", email=" + email);
+	    
+	    System.out.println("Received POST request for /Join");
+	    System.out.println("Received data: id=" + id + ", pwd=" + pwd + ", username=" + username + ", email=" + email);
 
 	    MemberService service = new MemberService();
 	    try {
@@ -74,7 +77,7 @@ public class Join extends HttpServlet {
 	
 		
 		// redirect 는 외부에서 접근하기 때문에 /SharePlaylists/ 필요함 
-		response.sendRedirect("/SharePlaylists/home.jsp");
+		response.sendRedirect("/SharePlaylists/member/login.jsp");
 		
 	}
 }

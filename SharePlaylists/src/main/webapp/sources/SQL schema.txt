@@ -30,3 +30,13 @@ CREATE TABLE users (
     email VARCHAR(100),                  -- 이메일 (Optional)
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- 생성 시간 (Default: 현재 시간)
 );
+
+-- friends 테이블 생성
+CREATE TABLE friends (
+    user_id VARCHAR(50) NOT NULL,        -- 친구를 추가한 사용자 ID
+    friend_id VARCHAR(50) NOT NULL,      -- 추가된 친구 ID
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 친구 추가 시간
+    PRIMARY KEY (user_id, friend_id),    -- 복합키 (중복 추가 방지)
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (friend_id) REFERENCES users(id) ON DELETE CASCADE
+);

@@ -32,6 +32,7 @@ public class Login extends HttpServlet {
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 요청 데이터 가져오기
         System.out.println("Received POST request for /Login");
@@ -40,6 +41,14 @@ public class Login extends HttpServlet {
         String pwd = request.getParameter("pwd");
 
         System.out.println("Received data: id=" + id + ", pwd=" + pwd);
+
+        // 입력값 검증
+        if (id == null || id.trim().isEmpty() || pwd == null || pwd.trim().isEmpty()) {
+            System.out.println("Empty input detected");
+            response.setContentType("text/html; charset=UTF-8");
+            response.getWriter().println("<script>alert('아이디와 비밀번호를 모두 입력해주세요.'); history.back();</script>");
+            return;
+        }
 
         // 서비스 객체를 통해 사용자 정보 확인
         MemberService service = new MemberService();
@@ -52,22 +61,20 @@ public class Login extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", member); // 세션에 사용자 정보 저장
                 System.out.println("Login successful for user: " + member.getUsername());
-                response.sendRedirect("/SharePlaylists/index.jsp"); // 메인 페이지로 이동
-            } else {
-            	// 비밀번호 불일치
-                System.out.println("Password mismatch for user: " + id);
 
-                // 응답 인코딩 설정 추가
+                // 메인 페이지로 이동
+                response.sendRedirect(request.getContextPath() + "/index.jsp");
+            } else {
+                // 비밀번호 불일치
+                System.out.println("Password mismatch for user: " + id);
                 response.setContentType("text/html; charset=UTF-8");
                 response.getWriter().println("<script>alert('비밀번호가 올바르지 않습니다.'); history.back();</script>");
             }
         } else {
-        	// 사용자가 없는 경우
+            // 사용자가 없는 경우
             System.out.println("User not found for id: " + id);
-
-            // 응답 인코딩 설정 추가
             response.setContentType("text/html; charset=UTF-8");
             response.getWriter().println("<script>alert('존재하지 않는 사용자입니다.'); history.back();</script>");
-            }
+        }
     }
 }

@@ -20,37 +20,14 @@ public class PlaylistService {
         songDao.addSong(songId, playlistId);
     }
     
-    // 플레이리스트 목록 가져오기
-    public List<Playlist> getAllPlaylists() throws SQLException {
-        return playlistDao.getAllPlaylists();
+    // 플레이리스트 유저 아이디로 가져오기
+    public List<Playlist> getPlaylistsByUserId(String userId) {
+        try {
+            return playlistDAO.getPlaylistsByUserId(userId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Failed to fetch playlists for user: " + userId, e);
+        }
     }
 
-//    public void addPlaylist(Playlist playlist) {
-//        playlistDao.addPlaylist(playlist);
-//    }
-//
-//    public List<Playlist> getPlaylists() {
-//        return playlistDao.getAllPlaylists();
-//    }
-//
-//    public void addSongToPlaylist(int playlistId, String link) {
-//        songDao.addSong(playlistId, link);
-//        updateTrackCount(playlistId);
-//    }
-//
-//    private void updateTrackCount(int playlistId) {
-//        String query = "UPDATE playlist SET track_count = " +
-//                       "(SELECT COUNT(*) FROM songs WHERE playlist_id = ?) WHERE playlist_id = ?";
-//
-//        try (Connection conn = DBConnect.getInstance().conn();
-//             PreparedStatement stmt = conn.prepareStatement(query)) {
-//
-//            stmt.setInt(1, playlistId);
-//            stmt.setInt(2, playlistId);
-//            stmt.executeUpdate();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            throw new RuntimeException("track_count 갱신 중 오류: " + e.getMessage(), e);
-//        }
-//    }
 }
