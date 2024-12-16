@@ -18,6 +18,10 @@ public class Playlist {
         this.songs = songs;
     }
     
+    public Playlist(String title) {
+    	this.playlistTitle = title;
+    };
+    
     public Playlist(String title, int trackCount, String thumbnail) {
         this.title = title;
         this.trackCount = trackCount;

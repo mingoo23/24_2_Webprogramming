@@ -36,10 +36,13 @@
                 <div class="title"><%= playlist_title %></div>
             </div>
 		</div>
-	
-    <%
+	<%
+    }
+    %>
+    <%-- <%
             }
-        } else {
+        } 
+        else {
             out.println("<p>플레이리스트가 존재하지 않습니다.</p>");
         }
     } catch (Exception e) {
@@ -50,6 +53,6 @@
         try { if (stmt != null) stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
         try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
     }
-    %>
+    %> --%>
     </div>
 </section>
