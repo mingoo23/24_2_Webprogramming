@@ -36,8 +36,10 @@
                 <div class="title"><%= playlist_title %></div>
             </div>
 		</div>
-	
-    <%
+	<%
+    }
+    %>
+    <%-- <%
             }
         } 
         else {
@@ -51,6 +53,6 @@
         try { if (stmt != null) stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
         try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
     }
-    %>
+    %> --%>
     </div>
 </section>
