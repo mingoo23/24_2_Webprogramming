@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
 
-<link rel="stylesheet" href="./workspace/workspace_styles.css" />
+
+<link rel="stylesheet" href="explore_styles.css" />
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*" %>
 
 <section id="explore" class="tab-content active">
     <div class="filter-section">
@@ -14,30 +18,25 @@
     Statement stmt = null;
     ResultSet rs = null;
 
-    try {
-        // 드라이버 로드
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        String jdbcUrl = "jdbc:mysql://localhost:3306/MusicApp";
-        conn = DriverManager.getConnection(jdbcUrl, "root", "0000");
-
-        // SQL 실행
-        stmt = conn.createStatement();
-        String sql = "SELECT * FROM playlist ORDER BY playlist_id ASC";
-        rs = stmt.executeQuery(sql);
-
-        // ResultSet 확인
-        if (rs != null) {
-            while (rs.next()) {
-                String playlist_title = rs.getString("playlist_title");
-    %>
-                <div class="playlist-card">
-                    <div class="thumbnail">
-                        <img src="" alt="썸네일 없음" />
-                    </div>
-                    <div class="card-content">
-                        <div class="title"><%= playlist_title %></div>
-                    </div>
-                </div>
+	%>
+	<div class="playlist-container">
+	<%
+	//플레이리스트 전부 출력하도록
+	while(rs.next()){
+		//playlist_id는 순서대로 플레이리스트 번호이므로
+		int playlist_id = rs.getRow();
+		String playlist_title = rs.getString("playlist_title");
+	%>
+	
+		<div class="playlist-card" onclick="클릭시 내부 뷰 구현">
+        	<div class="thumbnail">
+            	<img src="thumnail.png" alt="썸네일 없음" />
+            </div>
+            <div class="card-content">
+                <div class="title"><%= playlist_title %></div>
+            </div>
+		</div>
+	
     <%
             }
         } else {
@@ -52,4 +51,5 @@
         try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
     }
     %>
+    </div>
 </section>
