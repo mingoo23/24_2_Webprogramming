@@ -76,4 +76,31 @@ document.getElementById('add-playlist-btn').addEventListener('click', function()
     };
     xhr.send(); // Send the AJAX request
 });
+
+function addYouTubeLink() {
+    const inputField = document.getElementById("youtubeLink");
+    const link = inputField.value.trim();
+
+    if (link === "") {
+        alert("YouTube 링크를 입력해주세요!");
+        return;
+    }
+
+    // 새로운 리스트 아이템 생성
+    const listItem = document.createElement("li");
+    listItem.textContent = link;
+
+    // 숨겨진 input에 저장할 값 설정
+    const hiddenInput = document.createElement("input");
+    hiddenInput.type = "hidden";
+    hiddenInput.name = "links"; // links라는 배열로 서블릿에 전달됨
+    hiddenInput.value = link;
+
+    // 리스트와 폼에 각각 추가
+    listItem.appendChild(hiddenInput);
+    document.getElementById("linkList").appendChild(listItem);
+
+    // 입력 필드 초기화
+    inputField.value = "";
+}
 </script>
