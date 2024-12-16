@@ -18,12 +18,14 @@ public class PlaylistDao {
     			}
     }
 
-    // 플레이리스트 추가
-    public int addPlaylist(String playlistTitle) throws SQLException {
-        String query = "INSERT INTO playlist (playlist_title) VALUES (?)";
+ // 플레이리스트 추가 (user_id 포함)
+    public int addPlaylist(String playlistTitle, String userId) throws SQLException {
+        String query = "INSERT INTO playlist (playlist_title, user_id) VALUES (?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, playlistTitle);
+            stmt.setString(2, userId); // user_id 설정
             stmt.executeUpdate();
+            
             ResultSet rs = stmt.getGeneratedKeys();
             if (rs.next()) {
                 return rs.getInt(1); // 생성된 playlist_id 반환

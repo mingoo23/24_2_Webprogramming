@@ -30,6 +30,7 @@
 </style>
 
 <section id="workspace-listen" class="workspace-tab-content">    
+
         <%
    Connection conn = null;
    Statement stmt = null;
@@ -49,6 +50,7 @@
    rs.last();
    rs.beforeFirst();
 
+
    %>
    <div class="playlist-container">
    <div class="plus-button" onclick="location.href='<%= request.getContextPath() %>/workspace/workspace_createplaylist.jsp'">
@@ -64,6 +66,7 @@
       <div class="playlist-card" onclick="location.href ='<%= request.getContextPath() %>/workspace/workspace_edit_window.jsp?playlistTitle=<%= playlist_title%>& playlistId=<%= playlist_id%>'">
            <div class="thumbnail">
                <img src="thumnail.png" alt="썸네일 없음" />
+
             </div>
             <div class="card-content">
                 <div class="title"><%= playlist_title %></div>

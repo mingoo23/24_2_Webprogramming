@@ -66,6 +66,7 @@ input[type="button"] {
         <div id="create-playlist-content" style="display: block; margin-top: 20px;">
         <center><h1>새 플레이리스트 추가</h1>
 
+
        <!-- 플레이리스트 생성 폼 -->
        <form action="${pageContext.request.contextPath}/PlaylistCreationServlet" method="post">
 
@@ -90,6 +91,7 @@ input[type="button"] {
            </td>
         </tr>
         </table>        
+
     </form>
     </center>
 </section>

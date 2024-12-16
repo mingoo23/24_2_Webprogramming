@@ -2,14 +2,13 @@
 <%@ page import="java.sql.*" %>
 <link rel="stylesheet" href="explore_styles.css" />
 
-
 <section id="explore" class="tab-content active">
     <div class="filter-section">
         <button class="filter-btn active" data-filter="latest">최신순</button>
         <button class="filter-btn" data-filter="popular">인기순</button>
     </div>
 
-   <%
+  <%
 	Connection conn = null;
 	Statement stmt = null;
 	ResultSet rs = null;
@@ -45,7 +44,6 @@
                 <div class="title"><%= playlist_title %></div>
             </div>
 		</div>
-
     <%
 	}
     %>
