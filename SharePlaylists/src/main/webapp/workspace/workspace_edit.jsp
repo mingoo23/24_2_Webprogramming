@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
-<link rel="stylesheet" href="./workspace/workspace_styles.css" />
+<link rel="stylesheet" href="./explore_styles.css" />
 
 <section id="workspace-listen" class="workspace-tab-content">
     <div align="center">
