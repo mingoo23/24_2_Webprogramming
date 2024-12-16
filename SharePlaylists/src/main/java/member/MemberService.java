@@ -42,9 +42,4 @@ public class MemberService {
 	    }
 	}
 
-	public boolean addFriend(String userId, String friendId) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }

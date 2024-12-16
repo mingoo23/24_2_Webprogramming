@@ -25,40 +25,49 @@
     <title>친구 추가 페이지</title>
     <link rel="stylesheet" href="<%= request.getContextPath() %>/workspace/workspace_styles.css">
     <script>
-        function addFriend() {
-            const friendId = document.getElementById('friendId').value;
+    function addFriend() {
+        const friendId = document.getElementById('friendId').value;
 
-            // 비어있으면 경고
-            if (!friendId.trim()) {
-                alert('ID를 입력해주세요.');
-                return;
-            }
-
-            // AJAX 요청 생성
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', 'friend_add.jsp', true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-            // 요청 완료 후 결과 처리
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        document.getElementById('resultMessage').innerText = xhr.responseText;
-                        refreshFriendList();
-                    } else {
-                        alert('친구 추가 중 오류가 발생했습니다.');
-                    }
-                }
-            };
-
-            // 데이터 전송
-            xhr.send('friendId=' + encodeURIComponent(friendId));
+        // 비어있으면 경고
+        if (!friendId.trim()) {
+            alert('ID를 입력해주세요.');
+            return;
         }
+
+        // AJAX 요청 생성
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '<%= request.getContextPath() %>/FriendAdd', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        // 요청 완료 후 결과 처리
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText); // JSON 응답 파싱
+
+                    // 결과 메시지 출력
+                    const resultMessage = document.getElementById('resultMessage');
+                    resultMessage.style.color = response.status === "success" ? "green" : "red";
+                    resultMessage.innerText = response.message;
+
+                    // 친구 리스트 새로고침 (성공한 경우만)
+                    if (response.status === "success") {
+                        refreshFriendList();
+                    }
+                } else {
+                    alert('친구 추가 중 오류가 발생했습니다.');
+                }
+            }
+        };
+
+        // 데이터 전송
+        xhr.send('friendId=' + encodeURIComponent(friendId));
+    }
 
         // 친구 리스트 새로고침 함수
         function refreshFriendList() {
             const xhr = new XMLHttpRequest();
-            xhr.open('GET', 'friend_list.jsp', true);
+            xhr.open('GET', '<%= request.getContextPath() %>/FriendList', true);
 
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4 && xhr.status === 200) {
@@ -103,24 +112,25 @@
 
         <%-- 친구들의 플레이리스트 출력 --%>
         <div id="friendList">
-            <% if (friendPlaylists != null && !friendPlaylists.isEmpty()) { %>
-                <% for (FriendPlaylistDto playlist : friendPlaylists) { %>
-                    <div class="playlist-container">
-                        <div class="playlist-card">
-                            <div class="thumbnail">
-                                <img src="<%= playlist.getThumbnail() %>" alt="플레이리스트 썸네일" />
-                            </div>
-                            <div class="card-content">
-                                <div class="track-count"><%= playlist.getTrackCount() %> Tracks</div>
-                                <div class="title"><%= playlist.getPlaylistTitle() %></div>
-                            </div>
-                        </div>
-                    </div>
-                <% } %>
-            <% } else { %>
-                <p>추가된 친구가 없습니다. 친구를 추가해보세요!</p>
-            <% } %>
-        </div>
+		    <% if (friendPlaylists != null && !friendPlaylists.isEmpty()) { %>
+		        <% for (FriendPlaylistDto playlist : friendPlaylists) { %>
+		            <div class="playlist-container">
+		                <div class="playlist-card">
+		                    <div class="thumbnail">
+		                        <img src="<%= playlist.getThumbnail() %>" alt="플레이리스트 썸네일" />
+		                    </div>
+		                    <div class="card-content">
+		                        <div class="track-count"><%= playlist.getTrackCount() %> Tracks</div>
+		                        <div class="title"><%= playlist.getPlaylistTitle() %></div>
+		                    </div>
+		                </div>
+		            </div>
+		        <% } %>
+		    <% } else { %>
+		        <p>추가된 친구가 없습니다. 친구를 추가해보세요!</p>
+		        
+		    <% } %>
+		</div>
     </div>
 </section>
 </body>
