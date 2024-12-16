@@ -34,7 +34,7 @@
 		int playlist_id = rs.getRow();
 		String playlist_title = rs.getString("playlist_title");
 	%>
-		<div class="playlist-card" onclick="클릭시 내부 뷰 구현">
+		<div class="playlist-card" onclick="location.href='<%= request.getContextPath() %>/workspace/player/player.jsp'">
         	<div class="thumbnail">
             	<img src="thumbnail.png" alt="썸네일 없음" />
             </div>

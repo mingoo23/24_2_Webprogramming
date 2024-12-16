@@ -28,7 +28,6 @@ public class PlaylistCreationServlet extends HttpServlet {
 	     */
 	    public PlaylistCreationServlet() {
 	        super();
-	        // TODO Auto-generated constructor stub
 	    }
 
 	   /**
@@ -36,7 +35,7 @@ public class PlaylistCreationServlet extends HttpServlet {
 	    */
 	   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	      String PlaylistName = request.getParameter("title");
-	      Playlist playlist = new Playlist(PlaylistName);
+	      //Playlist playlist = new Playlist(PlaylistName);
 	      try {
 	         service.createPlaylist(PlaylistName);
 	         
