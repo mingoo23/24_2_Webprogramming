@@ -15,10 +15,10 @@ public class PlaylistService {
         return playlistDao.addPlaylist(title, userId); // userId 전달
     }
 
-    // 곡 추가
-    public void addSongToPlaylist(String songId, int playlistId) throws SQLException {
-        songDao.addSong(songId, playlistId);
-    }
+//    // 곡 추가
+//    public void addSongToPlaylist(String songId, int playlistId) throws SQLException {
+//        songDao.addSong(songId, playlistId);
+//    }
     
     // 플레이리스트 유저 아이디로 가져오기
     public List<Playlist> getPlaylistsByUserId(String userId) {
