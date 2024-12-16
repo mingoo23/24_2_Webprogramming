@@ -26,7 +26,7 @@
 	rs.beforeFirst();
 
 	%>
-	
+	<div class="playlist-container">
 	<%
 	//플레이리스트 전부 출력하도록
 	while(rs.next()){
@@ -36,7 +36,7 @@
 	%>
 		<div class="playlist-card" onclick="클릭시 내부 뷰 구현">
         	<div class="thumbnail">
-            	<img src="" alt="썸네일 없음" />
+            	<img src="thumbnail.png" alt="썸네일 없음" />
             </div>
             <div class="card-content">
                 <div class="title"><%= playlist_title %></div>
@@ -45,5 +45,6 @@
     <%
 	}
     %>
-</div>
+    
+    </div>
 </section>

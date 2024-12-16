@@ -28,7 +28,7 @@
 		String playlist_title = rs.getString("playlist_title");
 	%>
 	
-		<div class="playlist-card" onclick="클릭시 내부 뷰 구현">
+		<div class="playlist-card" onclick="">
         	<div class="thumbnail">
             	<img src="thumnail.png" alt="썸네일 없음" />
             </div>
