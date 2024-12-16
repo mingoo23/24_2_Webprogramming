@@ -68,6 +68,7 @@ input[type="button"] {
 
     	<!-- 플레이리스트 생성 폼 -->
     	<form action="${pageContext.request.contextPath}/PlaylistCreationServlet" method="post">
+
         <table border="0">
         <tr>
             <th style="font-size: 20px;">Playlist 이름</th>

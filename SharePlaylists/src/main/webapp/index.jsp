@@ -55,6 +55,7 @@
     <main id="main-content">
         <!-- 초기 로드될 콘텐츠 -->
     </main>
+
     <script src="scripts.js"></script>
     <script src="playBar.js"></script>
 </body>

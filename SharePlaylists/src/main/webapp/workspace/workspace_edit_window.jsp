@@ -1,3 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+
+<%
+	String playlistTitle = request.getParameter("playlistTitle");
+	int playlistId = Integer.parseInt(request.getParameter("playlistId"));
+%>
+
 <link rel="stylesheet" href="./workspace/workspace_styles.css" />
 <section id="workspace-edit" class="workspace-tab-content">
 
@@ -5,7 +14,7 @@
     <form>
       <table border="0" width="70%">
         <tr style="height: 80px">
-          <th class="title-category">Playlist 이름</th>
+          <th class="title-category"><%= playlistTitle %></th>
           <td class="td-container">
             <input
               type="text"
