@@ -49,6 +49,7 @@
                 <div class="title"><%= playlist_title %></div>
             </div>
 		</div>
+
     <%
 	}
     %>
