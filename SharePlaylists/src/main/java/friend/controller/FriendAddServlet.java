@@ -43,13 +43,13 @@ public class FriendAddServlet extends HttpServlet {
         FriendService friendService = new FriendService();
         boolean result = friendService.addFriend(userId, friendId);
 
-        response.setContentType("text/html; charset=UTF-8");
+        response.setContentType("application/json; charset=UTF-8"); // JSON 형식으로 반환
         if (result) {
-            System.out.println("Debug: Friend added successfully for userId = " + userId + ", friendId = " + friendId);
-            response.getWriter().write("<script>alert('친구가 성공적으로 추가되었습니다.'); history.back();</script>");
+            System.out.println("Debug: Friend added successfully.");
+            response.getWriter().write("{\"status\":\"success\", \"message\":\"친구가 성공적으로 추가되었습니다.\"}");
         } else {
-            System.out.println("Debug: Failed to add friend. Possible duplication or DB issue.");
-            response.getWriter().write("<script>alert('친구 추가에 실패했습니다. 이미 추가된 친구일 수 있습니다.'); history.back();</script>");
+            System.out.println("Debug: Failed to add friend.");
+            response.getWriter().write("{\"status\":\"error\", \"message\":\"친구 추가에 실패했습니다. 이미 추가된 친구일 수 있습니다.\"}");
         }
     }
 }
