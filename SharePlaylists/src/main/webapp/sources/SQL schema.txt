@@ -2,17 +2,30 @@ CREATE DATABASE IF NOT EXISTS Playlists;
 USE Playlists;
 
 -- playlist 테이블 생성
-CREATE TABLE playlist (
-    playlist_id INT AUTO_INCREMENT PRIMARY KEY, -- 각 플레이리스트를 고유하게 식별하는 ID
-    playlist_title VARCHAR(255) NOT NULL,      -- 플레이리스트 제목
+CREATE TABLE playlists (
+    playlist_id INT AUTO_INCREMENT PRIMARY KEY, -- 플레이리스트 고유 ID
+    user_id VARCHAR(255) NOT NULL,             -- 사용자 ID
+    title VARCHAR(255) NOT NULL,               -- 플레이리스트 제목
+    thumbnail VARCHAR(255),                    -- 썸네일 이미지
+    song_count INT DEFAULT 0,                  -- 곡 개수
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- 생성 시간
 );
 
 -- songs 테이블 생성
 CREATE TABLE songs (
-    song_id VARCHAR(255) PRIMARY KEY,          -- 고유한 곡 ID, 유튜브 링크
-    playlist_id INT                           -- 플레이리스트 ID (외래 키)
-    FOREIGN KEY (playlist_id) REFERENCES playlist(playlist_id)
-    ON DELETE CASCADE                          -- 플레이리스트 삭제 시 관련 곡도 삭제
+    song_id INT AUTO_INCREMENT PRIMARY KEY,    -- 곡 고유 ID
+    title VARCHAR(255) NOT NULL,               -- 곡 제목
+    artist VARCHAR(255) NOT NULL,              -- 아티스트 이름
+    duration TIME,                             -- 곡 길이 (HH:MM:SS)
+    thumbnail VARCHAR(255)                     -- 썸네일 이미지 (선택)
+);
+
+CREATE TABLE playlist_songs (
+    playlist_id INT NOT NULL,                  -- 연결된 플레이리스트 ID
+    song_id INT NOT NULL,                      -- 연결된 곡 ID
+    PRIMARY KEY (playlist_id, song_id),        -- 중복된 곡 방지
+    FOREIGN KEY (playlist_id) REFERENCES playlists(playlist_id) ON DELETE CASCADE,
+    FOREIGN KEY (song_id) REFERENCES songs(song_id) ON DELETE CASCADE
 );
 - 사용법
 플레이리스트 삽입
