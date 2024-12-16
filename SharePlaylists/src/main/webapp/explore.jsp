@@ -1,5 +1,5 @@
 
-<link rel="stylesheet" href="./workspace/workspace_styles.css" />
+<link rel="stylesheet" href="explore_styles.css" />
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
@@ -29,7 +29,7 @@
 	rs.beforeFirst();
 
 	%>
-	
+	<div class="playlist-container">
 	<%
 	//플레이리스트 전부 출력하도록
 	while(rs.next()){
@@ -37,15 +37,18 @@
 		int playlist_id = rs.getRow();
 		String playlist_title = rs.getString("playlist_title");
 	%>
+	
 		<div class="playlist-card" onclick="클릭시 내부 뷰 구현">
         	<div class="thumbnail">
-            	<img src="" alt="썸네일 없음" />
+            	<img src="thumnail.png" alt="썸네일 없음" />
             </div>
             <div class="card-content">
                 <div class="title"><%= playlist_title %></div>
             </div>
 		</div>
+	
     <%
 	}
     %>
+    </div>
 </section>
