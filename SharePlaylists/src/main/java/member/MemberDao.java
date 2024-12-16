@@ -19,12 +19,14 @@ public class MemberDao {
         MemberVo vo = null;
         Connection conn = null;
         try {
-            conn = dbconn.conn(); // 예외 처리
+            conn = dbconn.conn(); // DB 연결
             String sql = "SELECT * FROM users WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, id);
 
+            System.out.println("[DEBUG] SQL: " + sql + ", ID: " + id); // SQL 쿼리 확인
             ResultSet rs = pstmt.executeQuery(); // select 실행
+            
             if (rs.next()) { // 첫 줄로 이동하여 데이터 있는지 확인
                 vo = new MemberVo(
                     rs.getString("id"),
@@ -32,6 +34,9 @@ public class MemberDao {
                     rs.getString("username"),
                     rs.getString("email")
                 );
+                System.out.println("[DEBUG] User found: " + vo.getId());
+            } else {
+                System.out.println("[DEBUG] No user found for ID: " + id);
             }
         } catch (SQLException e) {
             e.printStackTrace();
