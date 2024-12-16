@@ -8,6 +8,7 @@ CREATE TABLE playlist (
     playlist_title VARCHAR(255) NOT NULL      -- 플레이리스트 제목
 );
 
+
 -- songs 테이블 생성
 CREATE TABLE songs (
     song_id VARCHAR(255) PRIMARY KEY,          -- 고유한 곡 ID, 유튜브 링크

@@ -63,7 +63,7 @@
       int playlist_id = rs.getRow();
       String playlist_title = rs.getString("playlist_title");
    %>
-      <div class="playlist-card" onclick="location.href ='<%= request.getContextPath() %>/workspace/workspace_edit_window.jsp?playlistTitle=<%= playlist_title%>& playlistId=<%= playlist_id%>'">
+      <div class="playlist-card" onclick="location.href ='<%= request.getContextPath() %>/workspace/workspace_edit_window.jsp?playlistTitle=<%= playlist_title%>'">
            <div class="thumbnail">
                <img src="thumnail.png" alt="썸네일 없음" />
 
