@@ -4,7 +4,7 @@
 
 <%
 	String playlistTitle = request.getParameter("playlistTitle");
-	//int playlistId = Integer.parseInt(request.getParameter("playlistId"));
+	int playlistId = Integer.parseInt(request.getParameter("playlistId"));
 %>
 
 <link rel="stylesheet" href="./workspace/workspace_styles.css" />
@@ -16,7 +16,7 @@
     	<label for="songId">Song ID (YouTube Link):</label><br>
     	<input type="text" id="songId" name="songId" placeholder="https://youtu.be/example1" required><br><br>
     	<label for="playlistId">Playlist ID:</label><br>
-    	<input type="number" id="playlistId" name="playlistId" placeholder="1" required><br><br>
+        <input type="hidden" id="playlistId" name="playlistId" value="<%=playlistId%>">
     	<button type="submit" onclick="addYouTubeLink()">Add Song</button>
     </form>
   </div>
