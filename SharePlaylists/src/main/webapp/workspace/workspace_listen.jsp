@@ -39,14 +39,15 @@
             <%
                 // 플레이리스트 출력
                 while (rs.next()) {
-                    String playlistTitle = rs.getString("playlist_title");
+                	int playlist_id = rs.getRow();
+                    String playlist_title = rs.getString("playlist_title");
             %>
-                <div class="playlist-card" onclick="location.href = '<%= request.getContextPath() %>/workspace/player/testyoutube.html'">
+                <div class="playlist-card" onclick="location.href='<%= request.getContextPath() %>/workspace/player/player.jsp?title=<%=playlist_title%>&playlist_id=<%=playlist_id%>'">
                     <div class="thumbnail">
                         <img src="thumnail.png" alt="썸네일 없음" />
                     </div>
                     <div class="card-content">
-                        <div class="title"><%= playlistTitle %></div>
+                        <div class="title"><%= playlist_title %></div>
                     </div>
                 </div>
             <%
