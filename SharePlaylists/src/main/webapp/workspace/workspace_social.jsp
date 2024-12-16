@@ -65,7 +65,6 @@
                     <div class="card-content">
                         <div class="title">플레이리스트: <%= playlist.getPlaylistTitle() %></div>
                         <div class="friend-name">친구 이름: <%= playlist.getFriendName() %></div>
-                        <div class="track-count">트랙 수: <%= playlist.getTrackCount() %></div>
                     </div>
                 </div>
             <%

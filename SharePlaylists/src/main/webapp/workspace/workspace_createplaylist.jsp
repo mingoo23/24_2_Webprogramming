@@ -62,34 +62,36 @@ input[type="button"] {
 
 <body>
 <section id = create-playlist-content>
-		<!-- 입력 폼 영역 -->
+      <!-- 입력 폼 영역 -->
         <div id="create-playlist-content" style="display: block; margin-top: 20px;">
         <center><h1>새 플레이리스트 추가</h1>
 
-    	<!-- 플레이리스트 생성 폼 -->
-		<form action="${pageContext.request.contextPath}/PlaylistCreationServlet" method="post">
-        <div>
-            <label for="title">Playlist 이름:</label>
-            <input type="text" id="title" name="title" required>
-        </div>
-        
-        <!-- 노래 입력은 내부에서 -->
-        <!-- <div>
-            <label for="youtubeLink">YouTube 링크 추가:</label>
-            <input type="text" id="youtubeLink" placeholder="YouTube 링크를 입력하세요">
-            <button type="button" onclick="addYouTubeLink()">추가</button>
-        </div>          
-        <div>
-            <h3>추가된 링크 목록:</h3>
-            <ul id="linkList">-->
-                <!-- 링크가 여기에 추가됩니다 -->
-        <!--  </ul>
-        </div>  -->
-         
-        <div>
-            <!-- <input type="hidden" name="trackCount" id="trackCount" value="0"> -->
-            <button type="submit">플레이리스트 생성</button>
-        </div>
+
+       <!-- 플레이리스트 생성 폼 -->
+       <form action="${pageContext.request.contextPath}/PlaylistCreationServlet" method="post">
+
+        <table border="0">
+        <tr>
+            <th style="font-size: 20px;">Playlist 이름</th>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+            <td><input type="text" id="title" name="title" class="input-window" required></td>
+           <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+           <td class="td-container">                            
+           <input
+              class="button btnPush btnOrange"
+              type="submit"
+              value="생성"
+            />
+            <input
+              class="button btnPush btnOrange"
+              type="button"
+              value="취소"
+              onclick="history.back();"
+            />
+           </td>
+        </tr>
+        </table>        
+
     </form>
     </center>
 </section>
@@ -97,7 +99,7 @@ input[type="button"] {
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-	function addYouTubeLink() {
+   function addYouTubeLink() {
     const inputField = document.getElementById("youtubeLink");
     const link = inputField.value.trim();
 
@@ -126,5 +128,5 @@ input[type="button"] {
     // trackCount 업데이트
     const trackCountInput = document.getElementById("trackCount");
     trackCountInput.value = parseInt(trackCountInput.value) + 1;
-	}
+   }
 </script>

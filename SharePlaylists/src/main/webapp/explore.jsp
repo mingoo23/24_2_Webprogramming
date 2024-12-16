@@ -5,10 +5,7 @@
 <link rel="stylesheet" href="explore_styles.css" />
 
 <section id="explore" class="tab-content active">
-    <div class="filter-section">
-        <button class="filter-btn active" data-filter="latest">최신순</button>
-        <button class="filter-btn" data-filter="popular">인기순</button>
-    </div>
+   
 
   <%
 	Connection conn = null;
@@ -40,7 +37,7 @@
 	%>
 		<div class="playlist-card" onclick="클릭시 내부 뷰 구현">
         	<div class="thumbnail">
-            	<img src="thumbnail.png" alt="썸네일 없음" />
+            	<img src="thumnail.png" alt="썸네일 없음" />
             </div>
             <div class="card-content">
                 <div class="title"><%= playlist_title %></div>
