@@ -1,16 +1,9 @@
 package playlist;
 
-import java.util.List;
-
 public class Playlist {
-    private int id;
-    private String title;
+	private int playlistId;
+    private String playlistTitle;
     private int trackCount;
-    private List<String> songs;  // 곡 목록 추가
-
-    public Playlist() {
-        // 기본 생성자
-    }
 
     public Playlist(int id, String title, int trackCount, List<String> songs) {
         this.id = id;
@@ -33,18 +26,17 @@ public class Playlist {
 
     public void setId(int id) {
         this.id = id;
+
     }
 
-    // Getter/Setter for title
-    public String getTitle() {
-        return title;
+    public int getPlaylistId() {
+        return playlistId;
     }
-
-    public void setTitle(String title) {
-        this.title = title;
+    
+    public String getPlaylistTitle() {
+        return playlistTitle;
     }
-
-    // Getter/Setter for trackCount
+    
     public int getTrackCount() {
         return trackCount;
     }
@@ -82,3 +74,4 @@ public class Playlist {
         return json.toString();
     }
 }
+
