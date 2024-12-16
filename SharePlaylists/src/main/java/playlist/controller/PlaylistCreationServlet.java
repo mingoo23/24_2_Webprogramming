@@ -78,6 +78,7 @@ public class PlaylistCreationServlet extends HttpServlet {
             int playlistId = service.createPlaylist(playlistName, userId);
             System.out.println("[DEBUG] Playlist created successfully: ID = " + playlistId);
 
+
             // 리다이렉트
             response.sendRedirect(request.getContextPath() + "/index.jsp");
         } catch (SQLException e) {
@@ -93,4 +94,3 @@ public class PlaylistCreationServlet extends HttpServlet {
         }
     }
 }
-	  
