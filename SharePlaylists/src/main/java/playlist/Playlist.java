@@ -1,9 +1,15 @@
 package playlist;
 
+import java.util.List;
+
 public class Playlist {
 	private int playlistId;
     private String playlistTitle;
     private int trackCount;
+    private int id;
+    private String title;
+    private List<String> songs;
+    
 
     public Playlist(int id, String title, int trackCount, List<String> songs) {
         this.id = id;

@@ -13,7 +13,7 @@ pageEncoding="UTF-8"%>
       <input type="button" value="뒤로 가기" onclick="history.back();" />
     </div>
     <center><h1>로그인</h1></center>
-    <form action="/SharePlaylists/Login" method="post">
+    <form action="${pageContext.request.contextPath}/Login" method="post">
       <div class="table-wrapper">
         <table>
           <tr>
