@@ -44,4 +44,37 @@ public class PlaylistDao {
 
         return playlists;
     }
+    
+ // 특정 사용자의 플레이리스트 가져오기
+    public List<Playlist> getPlaylistsByUserId(String userId) throws SQLException {
+        List<Playlist> playlists = new ArrayList<>();
+        String playlistSql = "SELECT playlist_id, playlist_title, track_count FROM playlist WHERE user_id = ?";
+        String songSql = "SELECT song_id FROM songs WHERE playlist_id = ?";
+
+        try (Connection conn = dbConnect.conn();
+             PreparedStatement pstmt = conn.prepareStatement(playlistSql)) {
+            pstmt.setString(1, userId);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                int playlistId = rs.getInt("playlist_id");
+                String playlistTitle = rs.getString("playlist_title");
+                int trackCount = rs.getInt("track_count");
+
+                // 곡 정보 가져오기
+                List<String> songs = new ArrayList<>();
+                try (PreparedStatement songStmt = conn.prepareStatement(songSql)) {
+                    songStmt.setInt(1, playlistId);
+                    ResultSet songRs = songStmt.executeQuery();
+                    while (songRs.next()) {
+                        songs.add(songRs.getString("song_id"));
+                    }
+                }
+
+                playlists.add(new Playlist(playlistId, playlistTitle, trackCount, songs));
+            }
+        }
+
+        return playlists;
+    }
 }

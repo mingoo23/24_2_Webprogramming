@@ -55,4 +55,14 @@ public class PlaylistService {
             throw new RuntimeException("플레이리스트 저장 중 오류 발생: " + e.getMessage(), e);
         }
     }
+    
+    // 플레이리스트 유저 아이디로 가져오기
+    public List<Playlist> getPlaylistsByUserId(String userId) {
+        try {
+            return playlistDAO.getPlaylistsByUserId(userId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Failed to fetch playlists for user: " + userId, e);
+        }
+    }
 }
