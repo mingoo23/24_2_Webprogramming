@@ -1,6 +1,5 @@
 <link rel="stylesheet" href="./workspace/workspace_styles.css" />
 <section id="workspace-edit" class="workspace-tab-content">
-
   <div align="center">
     <form>
       <table border="0" width="70%">
