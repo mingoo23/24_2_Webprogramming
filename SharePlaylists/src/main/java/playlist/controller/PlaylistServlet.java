@@ -37,22 +37,4 @@ public class PlaylistServlet extends HttpServlet {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "데이터베이스 오류");
         }
     }
-
-//    @Override
-//    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        String title = request.getParameter("title");
-//        String[] links = request.getParameterValues("links");
-//
-//        Playlist playlist = new Playlist(title);
-//        playlistService.addPlaylist(playlist);
-//
-//        if (links != null) {
-//            for (String link : links) {
-//                playlistService.addSongToPlaylist(playlist.getId(), link);
-//            }
-//        }
-//
-//        response.sendRedirect(request.getContextPath() + "/PlaylistServlet");
-//    }
 }

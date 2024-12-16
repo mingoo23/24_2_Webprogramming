@@ -50,6 +50,7 @@
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
+
         try {
             Class.forName("com.mysql.jdbc.Driver");
             String jdbcUrl = "jdbc:mysql://localhost:3306/playlists";
