@@ -18,6 +18,7 @@ public class Playlist {
         this.songs = songs;
     }
     
+    //플레이리스트 생성용 생성자
     public Playlist(String title) {
     	this.playlistTitle = title;
     };

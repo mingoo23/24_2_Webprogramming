@@ -11,7 +11,7 @@
         
         
         
-        <%
+    <%
 	Connection conn = null;
 	Statement stmt = null;
 	ResultSet rs = null;
@@ -39,8 +39,7 @@
 		int playlist_id = rs.getRow();
 		String playlist_title = rs.getString("playlist_title");
 	%>
-	
-		<div class="playlist-card" onclick="클릭시 내부 뷰 구현">
+		<div class="playlist-card" onclick="location.href ='<%= request.getContextPath() %>/workspace/workspace_edit_window.jsp?playlistTitle=<%= playlist_title%>& playlistId=<%= playlist_id%>'">
         	<div class="thumbnail">
             	<img src="thumnail.png" alt="썸네일 없음" />
             </div>
