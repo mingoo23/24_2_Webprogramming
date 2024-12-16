@@ -41,6 +41,33 @@
         #playlist div:hover {
             background-color: #f0f0f0;
         }
+        /* 버튼 스타일 */
+        .controls {
+        display: flex;
+        align-items: center;
+        justify-content: center; /* 중앙 정렬 */
+        gap: 10px;
+        }
+
+        .btn {
+        background: none;
+        border: none;
+        color: #ff7f00;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: transform 0.2s;
+        }
+
+        .btn:hover {
+        transform: scale(1.2);
+        }
+
+        .playerBar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center; /* 세로 정렬을 위한 선택 (중앙 정렬) */
+        width: 100%; /* 부모 컨테이너 너비를 기준으로 배치 */
+        }
     </style>
 </head>
 <body>
@@ -69,13 +96,22 @@
         }
         jsPlaylistArray.append("]");
     %>
-
-    <h1>플레이리스트 ID: <%= playlistId %></h1>
+	<div>
+      <br />
+      <input type="button" value="뒤로 가기" onclick="history.back();" />
+    </div>
+    <center><h1>플레이리스트 ID: <%= playlistId %></h1>
 
     <!-- 플레이어와 플레이리스트 영역 -->
     <div id="player"></div>
+    <div class="controls">
+	    <button class="btn btn-prev">⏮</button>
+	    <button class="btn btn-play" id="playButton">▶</button>
+	    <button class="btn btn-next" id="nextBtn">⏭</button>
+	</div>
     <div id="playlist"></div>
-
+	
+	</center>
     <!-- YouTube IFrame API -->
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
@@ -144,6 +180,78 @@
                 playlistElement.appendChild(item);
             });
         }
+        
+     // 재생/일시정지 토글
+        function playPause() {
+          const playButton = document.getElementById("playButton");
+
+          if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+            player.pauseVideo();
+            playButton.textContent = "▶"; // Play 상태
+          } else {
+            player.playVideo();
+            playButton.textContent = "❚❚"; // Pause 상태
+          }
+        }
+
+        // 다음 트랙 재생
+        function playNext() {
+          currentTrack = (currentTrack + 1) % playlist.length; // 다음 트랙으로 순환
+          player.loadVideoById(playlist[currentTrack]);
+          updatePlayButton();
+        }
+
+        // 이전 트랙 재생
+        function playPrev() {
+          currentTrack = (currentTrack - 1 + playlist.length) % playlist.length; // 이전 트랙으로 순환
+          player.loadVideoById(playlist[currentTrack]);
+          updatePlayButton();
+        }
+
+        // 플레이리스트 화면 갱신
+        function updatePlaylist() {
+          const playlistElement = document.getElementById('playlist');
+          playlistElement.innerHTML = '';
+
+          playlist.forEach((videoId, index) => {
+            const item = document.createElement('div');
+            item.textContent = `트랙 ${index + 1}`; // 트랙 이름
+            item.onclick = () => {
+              currentTrack = index;
+              player.loadVideoById(videoId);
+              updatePlayButton();
+            };
+            playlistElement.appendChild(item);
+          });
+        }
+
+        // 플레이 버튼 상태 업데이트
+        function updatePlayButton() {
+          const playButton = document.getElementById("playButton");
+          playButton.textContent = "❚❚"; // 새 비디오가 재생되면 Pause 버튼으로
+        }
+
+        // 버튼 이벤트 리스너 추가
+        document.addEventListener("DOMContentLoaded", function () {
+          const playButton = document.getElementById("playButton");
+          const prevButton = document.querySelector(".btn-prev");
+          const nextButton = document.getElementById("nextBtn");
+
+          // 재생/일시정지 버튼
+          playButton.addEventListener("click", playPause);
+
+          // 이전 곡 버튼
+          prevButton.addEventListener("click", function () {
+            console.log("이전 곡 재생");
+            playPrev();
+          });
+
+          // 다음 곡 버튼
+          nextButton.addEventListener("click", function () {
+            console.log("다음 곡 재생");
+            playNext();
+          });
+        });
     </script>
 </body>
 </html>
