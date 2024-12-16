@@ -51,7 +51,7 @@
   <div class="workspace-tab">
     <a href="#workspace-listen" class="workspace-header active" data-file="./workspace/workspace_listen.jsp">듣기</a>
     <a href="#workspace-edit" class="workspace-header" data-file="./workspace/workspace_edit.jsp">수정</a>
-    <a href="#workspace-social" class="workspace-header" data-file="./workspace/friend_add.jsp">친구</a>
+    <a href="#workspace-social" class="workspace-header" data-file="./workspace/workspace_social.jsp">친구</a>
   </div>
 
   <div id="workspace-content">
