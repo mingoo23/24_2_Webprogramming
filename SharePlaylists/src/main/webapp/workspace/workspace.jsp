@@ -15,7 +15,7 @@
     <style>
         /* 알림 메시지 스타일 */
         .notification {
-            background-color: #f44336;
+            background-color: #f44330;
             color: white;
             text-align: center;
             padding: 10px;
