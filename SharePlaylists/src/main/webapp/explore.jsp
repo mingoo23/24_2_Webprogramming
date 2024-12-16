@@ -13,10 +13,24 @@
         <button class="filter-btn" data-filter="popular">인기순</button>
     </div>
 
-    <%
-    Connection conn = null;
-    Statement stmt = null;
-    ResultSet rs = null;
+   <%
+	Connection conn = null;
+	Statement stmt = null;
+	ResultSet rs = null;
+	try{
+		Class.forName("com.mysql.jdbc.Driver");
+		String jdbcUrl = "jdbc:mysql://localhost:3306/playlists";
+		conn = DriverManager.getConnection(jdbcUrl,"root","0000");
+		stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+		//playlist 테이블에서 플레이리스트 모두 가져옴
+		String sql = "SELECT * FROM playlist ORDER BY playlist_id ASC";
+		rs = stmt.executeQuery(sql);
+	}catch(Exception e){
+		out.println("DB 연동 오류입니다.: " + e.getMessage());
+	}
+	
+	rs.last();
+	rs.beforeFirst();
 
 	%>
 	<div class="playlist-container">
@@ -27,29 +41,16 @@
 		int playlist_id = rs.getRow();
 		String playlist_title = rs.getString("playlist_title");
 	%>
-	
-		<div class="playlist-card" onclick="">
+		<div class="playlist-card" onclick="클릭시 내부 뷰 구현">
         	<div class="thumbnail">
-            	<img src="thumnail.png" alt="썸네일 없음" />
+            	<img src="thumbnail.png" alt="썸네일 없음" />
             </div>
             <div class="card-content">
                 <div class="title"><%= playlist_title %></div>
             </div>
 		</div>
-	
     <%
-            }
-        } else {
-            out.println("<p>플레이리스트가 존재하지 않습니다.</p>");
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-        out.println("<p>DB 연동 오류입니다.: " + e.getMessage() + "</p>");
-    } finally {
-        try { if (rs != null) rs.close(); } catch (SQLException e) { e.printStackTrace(); }
-        try { if (stmt != null) stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
-        try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
-    }
+	}
     %>
     </div>
 </section>

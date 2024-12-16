@@ -23,7 +23,7 @@ public class PlaylistService {
     // 플레이리스트 유저 아이디로 가져오기
     public List<Playlist> getPlaylistsByUserId(String userId) {
         try {
-            return playlistDAO.getPlaylistsByUserId(userId);
+            return playlistDao.getPlaylistsByUserId(userId);
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException("Failed to fetch playlists for user: " + userId, e);
