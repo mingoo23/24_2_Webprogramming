@@ -4,7 +4,7 @@ USE Playlists;
 -- playlist 테이블 생성
 CREATE TABLE playlist (
     playlist_id INT AUTO_INCREMENT PRIMARY KEY, -- 각 플레이리스트를 고유하게 식별하는 ID
-    playlist_title VARCHAR(255) NOT NULL,      -- 플레이리스트 제목
+    playlist_title VARCHAR(255) NOT NULL      -- 플레이리스트 제목
 );
 
 -- songs 테이블 생성
