@@ -13,8 +13,8 @@
 	<input type="button" value="뒤로 가기" onclick="history.back();">
 	</div>
 	<center><h1>회원가입</h1></center>
-	<form action="/SharePlaylists/Join" method="post">
-	<div class="table-wrapper">
+	<form action="${pageContext.request.contextPath}/Join" method="post">
+		<div class="table-wrapper">
 		<table border="0" align="center">
 				<tr>
 					<th>ID</th>

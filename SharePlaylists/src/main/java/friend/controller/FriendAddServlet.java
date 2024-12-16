@@ -8,6 +8,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import member.MemberService;
+import member.MemberVo;
 
 @WebServlet("/FriendAdd")
 public class FriendAddServlet extends HttpServlet {
@@ -19,21 +22,28 @@ public class FriendAddServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // 세션에서 사용자 ID 가져오기
-        String userId = (String) request.getSession().getAttribute("user");
-        String friendId = request.getParameter("friendId");
+        // 세션에서 MemberVo 객체 가져오기
+        HttpSession session = request.getSession();
+        MemberVo user = (MemberVo) session.getAttribute("user");
 
-        System.out.println("Debug: Received userId = " + userId + ", friendId = " + friendId);
-
-        response.setContentType("text/html; charset=UTF-8");
-        if (userId == null) {
-            System.out.println("Debug: User not logged in. Session userId is null.");
+        if (user == null) {
+            System.out.println("Debug: User not logged in. Session user is null.");
+            response.setContentType("text/html; charset=UTF-8");
             response.getWriter().write("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
             return;
         }
 
-        // 친구 추가 시도
-        boolean result = service.addFriend(userId, friendId);
+        // 사용자 ID와 추가할 친구 ID 가져오기
+        String userId = user.getId(); // MemberVo에서 사용자 ID 가져옴
+        String friendId = request.getParameter("friendId");
+
+        System.out.println("Debug: Received userId = " + userId + ", friendId = " + friendId);
+
+        // FriendService를 통해 친구 추가 시도
+        FriendService friendService = new FriendService();
+        boolean result = friendService.addFriend(userId, friendId);
+
+        response.setContentType("text/html; charset=UTF-8");
         if (result) {
             System.out.println("Debug: Friend added successfully for userId = " + userId + ", friendId = " + friendId);
             response.getWriter().write("<script>alert('친구가 성공적으로 추가되었습니다.'); history.back();</script>");
