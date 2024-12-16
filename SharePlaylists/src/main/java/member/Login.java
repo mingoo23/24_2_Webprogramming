@@ -60,6 +60,8 @@ public class Login extends HttpServlet {
                 // 로그인 성공
                 HttpSession session = request.getSession();
                 session.setAttribute("user", member); // 세션에 사용자 정보 저장
+                System.out.println("Session ID: " + session.getId());
+                System.out.println("User stored in session: " + session.getAttribute("user"));
                 System.out.println("Login successful for user: " + member.getUsername());
 
                 // 메인 페이지로 이동
