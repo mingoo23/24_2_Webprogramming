@@ -10,7 +10,7 @@
         <button class="filter-btn" data-filter="popular">인기순</button>
     </div>
 
-   <%
+  <%
 	Connection conn = null;
 	Statement stmt = null;
 	ResultSet rs = null;
@@ -46,7 +46,6 @@
                 <div class="title"><%= playlist_title %></div>
             </div>
 		</div>
-
     <%
 	}
     %>

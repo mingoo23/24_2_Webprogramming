@@ -19,7 +19,7 @@ public class PlaylistServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String playlisyTitle = request.getParameter("")
+		//String playlisyTitle = request.getParameter("")
 	}
 	
     private final PlaylistService service = new PlaylistService();
