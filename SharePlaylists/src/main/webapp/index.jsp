@@ -29,7 +29,7 @@
             
                 <!-- 로그인 상태: 로그아웃 버튼 표시 -->
                 <span>환영합니다, <%= user.getUsername() %> 님</span>
-				<a href="javascript:void(0);" onclick="confirmLogout();">로그아웃</a>				
+				<a href="javascript:void(0);" onclick="confirmLogout();">로그아웃</a>	
 				
 				<script>
 				    function confirmLogout() {

@@ -10,32 +10,28 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import playlist.Playlist;
 
-@WebServlet("/Friend")
+@WebServlet("/FriendPlaylists")
 public class FriendServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private FriendService service = new FriendService();
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        
+        // 세션에서 userId 가져오기
         String userId = (String) request.getSession().getAttribute("userId");
-        response.setContentType("application/json; charset=UTF-8");
-
+        
         if (userId == null) {
-            response.getWriter().write("{\"error\":\"로그인이 필요합니다.\"}");
+            response.sendRedirect(request.getContextPath() + "/member/login.jsp");
             return;
         }
 
-        List<FriendPlaylistDto> playlists = service.getFriendPlaylists(userId);
-        int totalFriends = service.getTotalFriendCount(userId);
+        // 친구들의 플레이리스트 가져오기
+        List<FriendPlaylistDto> friendPlaylists = service.getFriendPlaylists(userId);
+        request.setAttribute("friendPlaylists", friendPlaylists);
 
-        StringBuilder json = new StringBuilder("{\"totalCount\":").append(totalFriends).append(",\"friends\":[");
-        for (int i = 0; i < playlists.size(); i++) {
-            json.append(playlists.get(i).toJson());
-            if (i < playlists.size() - 1) json.append(",");
-        }
-        json.append("]}");
-
-        response.getWriter().write(json.toString());
+        // JSP로 포워딩
+        request.getRequestDispatcher("/workspace/friend_playlists.jsp").forward(request, response);
     }
 }
