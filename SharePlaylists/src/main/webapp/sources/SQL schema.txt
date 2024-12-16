@@ -5,17 +5,22 @@ USE Playlists;
 CREATE TABLE playlist (
     playlist_id INT AUTO_INCREMENT PRIMARY KEY, -- 각 플레이리스트를 고유하게 식별하는 ID
     playlist_title VARCHAR(255) NOT NULL,      -- 플레이리스트 제목
-    playlist_thumbnail VARCHAR(2083),          -- 썸네일 URL (최대 URL 길이)
-    track_count INT NOT NULL                   -- 트랙 수
 );
 
 -- songs 테이블 생성
 CREATE TABLE songs (
-    song_id VARCHAR(255) PRIMARY KEY,          -- 고유한 곡 ID
-    playlist_id INT,                           -- 연관된 플레이리스트 ID
+    song_id VARCHAR(255) PRIMARY KEY,          -- 고유한 곡 ID, 유튜브 링크
+    playlist_id INT                           -- 플레이리스트 ID (외래 키)
     FOREIGN KEY (playlist_id) REFERENCES playlist(playlist_id)
     ON DELETE CASCADE                          -- 플레이리스트 삭제 시 관련 곡도 삭제
 );
+- 사용법
+플레이리스트 삽입
+INSERT INTO playlist (playlist_title) VALUES (”sample_title”);
+
+곡 추가
+INSERT INTO songs (song_id, playlist_id) VALUES ('https://youtu.be/example1', 1);
+INSERT INTO songs (song_id, playlist_id) VALUES ('https://youtu.be/example2', 1);
 
 -- login 
 CREATE TABLE users (

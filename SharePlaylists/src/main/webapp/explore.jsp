@@ -36,17 +36,13 @@
 		//playlist_id는 순서대로 플레이리스트 번호이므로
 		int playlist_id = rs.getRow();
 		String playlist_title = rs.getString("playlist_title");
-		String playlist_thumbnail = rs.getString("playlist_thumbnail");
-		int track_count = Integer.parseInt(rs.getString("track_count"));
-	
 	%>
-		<div class="playlist-card">
+		<div class="playlist-card" onclick="클릭시 내부 뷰 구현">
         	<div class="thumbnail">
-            	<img src="<%=playlist_thumbnail %>" alt="썸네일 없음" />
+            	<img src="" alt="썸네일 없음" />
             </div>
             <div class="card-content">
                 <div class="title"><%= playlist_title %></div>
-    	        <div class="track-count"><%= track_count%></div>
             </div>
 		</div>
     <%
