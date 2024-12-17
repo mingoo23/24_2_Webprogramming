@@ -10,6 +10,16 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+
+
+//import javax.servlet.RequestDispatcher;
+//import javax.servlet.ServletException;
+//import javax.servlet.annotation.WebServlet;
+//import javax.servlet.http.HttpServlet;
+//import javax.servlet.http.HttpServletRequest;
+//import javax.servlet.http.HttpServletResponse;
+//import javax.servlet.http.HttpSession;
+
 /**
  * Servlet implementation class Login
  */
@@ -23,60 +33,69 @@ public class Login extends HttpServlet {
     public Login() {
         super();
     }
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 로그인 화면을 반환
         RequestDispatcher dis = request.getRequestDispatcher("/member/login.jsp"); // 로그인 JSP로 포워딩
         dis.forward(request, response);
     }
 
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 요청 데이터 가져오기
-        System.out.println("Received POST request for /Login");
+        System.out.println("[INFO] Received POST request for /Login");
 
         String id = request.getParameter("id");
         String pwd = request.getParameter("pwd");
 
-        System.out.println("Received data: id=" + id + ", pwd=" + pwd);
+        System.out.println("[DEBUG] Received data: id=" + id + ", pwd=" + pwd);
 
         // 입력값 검증
         if (id == null || id.trim().isEmpty() || pwd == null || pwd.trim().isEmpty()) {
-            System.out.println("Empty input detected");
-            response.setContentType("text/html; charset=UTF-8");
-            response.getWriter().println("<script>alert('아이디와 비밀번호를 모두 입력해주세요.'); history.back();</script>");
+            System.out.println("[ERROR] Empty input detected");
+            alertAndGoBack(response, "아이디와 비밀번호를 모두 입력해주세요.");
             return;
         }
 
         // 서비스 객체를 통해 사용자 정보 확인
         MemberService service = new MemberService();
-        MemberVo member = service.getMember(id);
+        MemberVo member = null;
 
-        if (member != null) {
-            // 비밀번호 확인
-            if (member.getPwd().equals(pwd)) {
-                // 로그인 성공
-                HttpSession session = request.getSession();
-                session.setAttribute("user", member); // 세션에 사용자 정보 저장
-                System.out.println("Session ID: " + session.getId());
-                System.out.println("User stored in session: " + session.getAttribute("user"));
-                System.out.println("Login successful for user: " + member.getUsername());
-
-                // 메인 페이지로 이동
-                response.sendRedirect(request.getContextPath() + "/index.jsp");
-            } else {
-                // 비밀번호 불일치
-                System.out.println("Password mismatch for user: " + id);
-                response.setContentType("text/html; charset=UTF-8");
-                response.getWriter().println("<script>alert('비밀번호가 올바르지 않습니다.'); history.back();</script>");
-            }
-        } else {
-            // 사용자가 없는 경우
-            System.out.println("User not found for id: " + id);
-            response.setContentType("text/html; charset=UTF-8");
-            response.getWriter().println("<script>alert('존재하지 않는 사용자입니다.'); history.back();</script>");
+        try {
+            member = service.getMember(id);
+        } catch (Exception e) {
+            System.out.println("[ERROR] Exception while fetching user data: " + e.getMessage());
+            e.printStackTrace();
+            alertAndGoBack(response, "서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+            return;
         }
+
+        // NullPointerException 방지
+        if (member == null) {
+            System.out.println("[ERROR] User not found for id: " + id);
+            alertAndGoBack(response, "존재하지 않는 사용자입니다.");
+            return;
+        }
+
+        // 비밀번호 확인
+        if (member.getPwd() != null && member.getPwd().equals(pwd)) {
+            // 로그인 성공
+            HttpSession session = request.getSession();
+            session.setAttribute("user", member); // 세션에 사용자 정보 저장
+            System.out.println("[INFO] Login successful for user: " + member.getUsername());
+            response.sendRedirect(request.getContextPath() + "/index.jsp");
+        } else {
+            // 비밀번호 불일치
+            System.out.println("[ERROR] Password mismatch for user: " + id);
+            alertAndGoBack(response, "비밀번호가 올바르지 않습니다.");
+        }
+    }
+
+    /**
+     * 클라이언트에 경고창을 표시하고 이전 페이지로 돌아가는 메서드
+     */
+    private void alertAndGoBack(HttpServletResponse response, String message) throws IOException {
+        response.setContentType("text/html; charset=UTF-8");
+        response.getWriter().println("<script>alert('" + message + "'); history.back();</script>");
     }
 }

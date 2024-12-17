@@ -9,7 +9,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import member.MemberService;
 import member.MemberVo;
 
 @WebServlet("/FriendAdd")
@@ -29,7 +28,7 @@ public class FriendAddServlet extends HttpServlet {
         if (user == null) {
             System.out.println("Debug: User not logged in. Session user is null.");
             response.setContentType("text/html; charset=UTF-8");
-            response.getWriter().write("<script>alert('로그인이 필요합니다.'); location.href='login.jsp';</script>");
+            response.getWriter().write("<script>alert('로그인이 필요합니다.'); location.href='member/login.jsp';</script>");
             return;
         }
 
@@ -40,16 +39,19 @@ public class FriendAddServlet extends HttpServlet {
         System.out.println("Debug: Received userId = " + userId + ", friendId = " + friendId);
 
         // FriendService를 통해 친구 추가 시도
-        FriendService friendService = new FriendService();
-        boolean result = friendService.addFriend(userId, friendId);
+        boolean result = service.addFriend(userId, friendId);
 
-        response.setContentType("application/json; charset=UTF-8"); // JSON 형식으로 반환
         if (result) {
             System.out.println("Debug: Friend added successfully.");
-            response.getWriter().write("{\"status\":\"success\", \"message\":\"친구가 성공적으로 추가되었습니다.\"}");
+            // 성공 시 메시지 설정 후 원래 페이지로 리다이렉트
+            session.setAttribute("message", "친구가 성공적으로 추가되었습니다.");
         } else {
             System.out.println("Debug: Failed to add friend.");
-            response.getWriter().write("{\"status\":\"error\", \"message\":\"친구 추가에 실패했습니다. 이미 추가된 친구일 수 있습니다.\"}");
+            // 실패 시 메시지 설정 후 원래 페이지로 리다이렉트
+            session.setAttribute("message", "친구 추가에 실패했습니다. 이미 추가된 친구일 수 있습니다.");
         }
+
+        // 원래 폼이 있는 페이지로 리다이렉트
+        response.sendRedirect(request.getContextPath() + "/index.jsp");
     }
 }

@@ -1,49 +1,69 @@
 <%@ page import="java.util.List, playlist.Playlist" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<%@ page import="java.sql.*, member.MemberVo" %>
 <link rel="stylesheet" href="./workspace/workspace_styles.css" />
-<%@ page import="java.sql.*" %>
+
+<%
+    // 세션에서 로그인된 사용자 정보 확인
+    MemberVo user = (MemberVo) session.getAttribute("user");
+    if (user == null) {
+        response.sendRedirect(request.getContextPath() + "/member/login.jsp");
+        return;
+    }
+
+    // 로그인된 사용자의 ID
+    String userId = user.getId();
+%>
 
 <section id="workspace-listen" class="workspace-tab-content">
-<div align="center">
-    <h1>내 플레이리스트</h1>
-    <%
-	Connection conn = null;
-	Statement stmt = null;
-	ResultSet rs = null;
-	try{
-		Class.forName("com.mysql.jdbc.Driver");
-		String jdbcUrl = "jdbc:mysql://localhost:3306/playlists";
-		conn = DriverManager.getConnection(jdbcUrl,"root","0000");
-		stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-		//playlist 테이블에서 플레이리스트 모두 가져옴
-		String sql = "SELECT * FROM playlist ORDER BY playlist_id ASC";
-		rs = stmt.executeQuery(sql);
-	}catch(Exception e){
-		out.println("DB 연동 오류입니다.: " + e.getMessage());
-	}
-	
-	rs.last();
-	rs.beforeFirst();
+    <div align="center">
+        <h1>내 플레이리스트</h1>
+        <%
+            Connection conn = null;
+            PreparedStatement pstmt = null;
+            ResultSet rs = null;
+            try {
+                // MySQL 연결 설정
+                Class.forName("com.mysql.jdbc.Driver");
+                String jdbcUrl = "jdbc:mysql://localhost:3306/playlists";
+                conn = DriverManager.getConnection(jdbcUrl, "root", "0000");
 
-	%>
-	
-	<%
-	//플레이리스트 전부 출력하도록
-	while(rs.next()){
-		//playlist_id는 순서대로 플레이리스트 번호이므로
-		int playlist_id = rs.getRow();
-		String playlist_title = rs.getString("playlist_title");
-	%>
-		<div class="playlist-card" onclick="클릭시 내부 뷰 구현">
-        	<div class="thumbnail">
-            	<img src="" alt="썸네일 없음" />
-            </div>
-            <div class="card-content">
-                <div class="title"><%= playlist_title %></div>
-            </div>
-		</div>
-    <%
-	}
-    %>
-</div>
+                // 로그인된 사용자의 플레이리스트만 가져오는 SQL
+                String sql = "SELECT * FROM playlist WHERE user_id = ? ORDER BY playlist_id ASC";
+                pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1, userId); // 현재 로그인된 사용자의 ID를 바인딩
+                rs = pstmt.executeQuery();
+        %>
+
+        <div class="playlist-container">
+            <%
+                // 플레이리스트 출력
+                while (rs.next()) {
+                	int playlist_id = rs.getRow();
+                    String playlist_title = rs.getString("playlist_title");
+            %>
+                <div class="playlist-card" onclick="location.href='<%= request.getContextPath() %>/workspace/player/player.jsp?title=<%=playlist_title%>&playlist_id=<%=playlist_id%>'">
+                    <div class="thumbnail">
+                        <img src="thumnail.png" alt="썸네일 없음" />
+                    </div>
+                    <div class="card-content">
+                        <div class="title"><%= playlist_title %></div>
+                    </div>
+                </div>
+            <%
+                }
+            %>
+        </div>
+        <%
+            } catch (Exception e) {
+                out.println("<p>DB 오류: " + e.getMessage() + "</p>");
+            } finally {
+                // 리소스 정리
+                if (rs != null) try { rs.close(); } catch (Exception e) {}
+                if (pstmt != null) try { pstmt.close(); } catch (Exception e) {}
+                if (conn != null) try { conn.close(); } catch (Exception e) {}
+            }
+        %>
+
+    </div>
 </section>

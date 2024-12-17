@@ -6,7 +6,8 @@ import java.sql.SQLException;
 
 public class DBConnect {
     private static DBConnect dbconn = new DBConnect();
-    private String url = "jdbc:mysql://13.124.125.48/playlists"; // DB URL
+    //private String url = "jdbc:mysql://13.124.125.48/playlists"; // DB URL
+    private String url = "jdbc:mysql://localhost:3306/playlists?serverTimezone=UTC"; // DB URL
     private String username = "root"; // DB 사용자 이름
     private String password = "0000"; // DB 비밀번호
 

@@ -29,7 +29,7 @@
             
                 <!-- 로그인 상태: 로그아웃 버튼 표시 -->
                 <span>환영합니다, <%= user.getUsername() %> 님</span>
-				<a href="javascript:void(0);" onclick="confirmLogout();">로그아웃</a>				
+				<a href="javascript:void(0);" onclick="confirmLogout();">로그아웃</a>	
 				
 				<script>
 				    function confirmLogout() {
@@ -55,28 +55,6 @@
     <main id="main-content">
         <!-- 초기 로드될 콘텐츠 -->
     </main>
-    <section class="player">
-        <!-- 재생 바 -->
-        <article class="progress-bar">
-            <div class="progress" style="width: 90%;"></div>
-        </article>
-
-        <!-- 컨트롤 버튼 -->
-        <article class="playerBar">
-            <div style="width: 200px;">
-                <img src="thumnail.png" width="35" height="35" alt="썸네일">
-                &nbsp;Up (Karina Solo)
-            </div>
-            <div class="controls">
-                <button class="btn btn-prev">⏮</button>
-                <button class="btn btn-play" id="playButton">▶</button>
-                <button class="btn btn-next">⏭</button>
-            </div>
-            <div style="width: 200px; text-align: right;">
-                <button class="btn btn-menu">▲</button>
-            </div>
-        </article>
-    </section>
 
     <script src="scripts.js"></script>
     <script src="playBar.js"></script>

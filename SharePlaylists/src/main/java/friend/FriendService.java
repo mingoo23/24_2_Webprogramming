@@ -22,18 +22,20 @@ public class FriendService {
             return false;
         }
     }
-
+    
     // 친구들의 플레이리스트 가져오기
     public List<FriendPlaylistDto> getFriendPlaylists(String userId) {
         List<FriendPlaylistDto> friendPlaylists = new ArrayList<>();
+        
         String sql = "SELECT u.id AS friend_id, u.username AS friend_name, " +
-                     "p.playlist_title AS playlist_title, p.playlist_thumbnail AS thumbnail, p.track_count " +
+                     "p.playlist_title AS playlist_title " +
                      "FROM friends f " +
                      "JOIN users u ON f.friend_id = u.id " +
                      "JOIN playlist p ON u.id = p.user_id " +
                      "WHERE f.user_id = ?";
         try (Connection conn = dbConnect.conn();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
             pstmt.setString(1, userId);
             ResultSet rs = pstmt.executeQuery();
 
@@ -42,13 +44,15 @@ public class FriendService {
                     rs.getString("friend_id"),
                     rs.getString("friend_name"),
                     rs.getString("playlist_title"),
-                    rs.getString("thumbnail"),
-                    rs.getInt("track_count")
+                    null, // 썸네일이 없어서 null로 대체
+                    0     // 트랙 수가 없어서 0으로 대체
                 ));
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("[ERROR] SQL Exception while fetching friend playlists.");
         }
+        System.out.println("[DEBUG] Total playlists found: " + friendPlaylists.size());
         return friendPlaylists;
     }
 

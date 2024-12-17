@@ -56,8 +56,8 @@ public class FriendPlaylistDto {
     }
     public String toJson() {
         return String.format(
-            "{\"friendId\":\"%s\",\"friendName\":\"%s\",\"playlistTitle\":\"%s\",\"thumbnail\":\"%s\",\"trackCount\":%d}",
-            friendId, friendName, playlistTitle, thumbnail, trackCount
+            "{\"friendId\":\"%s\",\"friendName\":\"%s\",\"playlistTitle\":\"%s\"}",
+            friendId, friendName, playlistTitle
         );
     }
 }

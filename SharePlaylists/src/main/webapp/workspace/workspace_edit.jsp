@@ -1,93 +1,101 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import="java.sql.*" %>
-<link rel="stylesheet" href="./workspace/workspace_styles.css" />
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*, member.MemberVo" %>
 
-<section id="workspace-listen" class="workspace-tab-content">
-    <div align="center">
-        <!-- '새 플레이리스트 추가' 버튼 -->
-        <button id="add-playlist-btn">새 플레이리스트 추가</button>
-    </div>
-    <!-- 플레이리스트 생성 폼을 위한 컨테이너 -->
-    <div id="create-playlist-content">
-    <h1>새 플레이리스트 추가</h1>
+<link rel="stylesheet" href="./explore_styles.css" />
+<style>
+/* 추가 버튼 스타일 */
+.plus-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(20% - 20px); /* 버튼의 너비 */
+  height: 200px; /* 버튼의 높이 */
+  color: #808080; /* 텍스트 색상 */
+  border: 2px solid #808080; /* 테두리 색상 */
+  border-radius: 10px; /* 버튼 둥글게 만들기 */
+  cursor: pointer; /* 클릭할 수 있는 포인터 표시 */
+  transition: all 0.3s ease; /* 부드러운 전환 효과 */
+}
 
-    <!-- 플레이리스트 생성 폼 -->
-    <form action="${pageContext.request.contextPath}/PlaylistCreateServlet" method="post">
-        <div>
-            <label for="title">Playlist 이름:</label>
-            <input type="text" id="title" name="title" required>
-        </div>
-        <div>
-            <label for="youtubeLink">YouTube 링크 추가:</label>
-            <input type="text" id="youtubeLink" placeholder="YouTube 링크를 입력하세요">
-            <button type="button" onclick="addYouTubeLink()">추가</button>
-        </div>
-        <div>
-            <h3>추가된 링크 목록:</h3>
-            <ul id="linkList">
-                <!-- 링크가 여기에 추가됩니다 -->
-            </ul>
-        </div>
-        <div>
-            <input type="hidden" name="trackCount" id="trackCount" value="0">
-            <button type="submit">플레이리스트 생성</button>
-        </div>
-    </form>
-    
-    </div>
-</section>
+.plus-button .icon {
+  font-size: 50px; /* 아이콘 크기 */
+}
 
+.plus-button:hover {
+  border-color: #aaa; /* 테두리 색 변경 */
+  color: #aaa; /* 텍스트 색상 변경 */
+}
+</style>
 
+<%
+    // 세션에서 로그인된 사용자 정보 확인
+    MemberVo user = (MemberVo) session.getAttribute("user");
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-$(document).ready(function() {
-    $("#add-playlist-btn").click(function() {
-        $.ajax({
-            url: "togglePlaylistForm",  // 서버의 엔드포인트 URL
-            type: "POST",
-            data: { isVisible: $("#create-playlist-content").is(":visible") },
-            success: function(response) {
-                if (response.success) {
-                    $("#create-playlist-content").toggle();
-                }
-            },
-            error: function() {
-                console.error("플레이리스트 폼 토글 중 오류가 발생했습니다.");
-            }
-        });
-    });
-});
-function addYouTubeLink() {
-    const inputField = document.getElementById("youtubeLink");
-    const link = inputField.value.trim();
-
-    if (link === "") {
-        alert("YouTube 링크를 입력해주세요!");
+    if (user == null) {
+        response.sendRedirect(request.getContextPath() + "/member/login.jsp");
         return;
     }
 
-    // 새로운 리스트 아이템 생성
-    const listItem = document.createElement("li");
-    listItem.textContent = link;
+    // 현재 로그인한 사용자의 ID 가져오기
+    String userId = user.getId();
+%>
 
-    // 숨겨진 input에 저장할 값 설정
-    const hiddenInput = document.createElement("input");
-    hiddenInput.type = "hidden";
-    hiddenInput.name = "links"; // links라는 배열로 서블릿에 전달됨
-    hiddenInput.value = link;
+<section id="workspace-listen" class="workspace-tab-content">
+    <div align="center">
+        <h1>내 플레이리스트</h1>
+    </div>        
+    
+    <%
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
 
-    // 리스트와 폼에 각각 추가
-    listItem.appendChild(hiddenInput);
-    document.getElementById("linkList").appendChild(listItem);
 
-    // 입력 필드 초기화
-    inputField.value = "";
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            String jdbcUrl = "jdbc:mysql://localhost:3306/playlists";
+            conn = DriverManager.getConnection(jdbcUrl, "root", "0000");
 
-    // trackCount 업데이트
-    const trackCountInput = document.getElementById("trackCount");
-    trackCountInput.value = parseInt(trackCountInput.value) + 1;
-}
-</script>
+            // 현재 로그인된 사용자(userId)의 플레이리스트만 가져오기
+            String sql = "SELECT * FROM playlist WHERE user_id = ? ORDER BY playlist_id ASC";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, userId);
+            rs = pstmt.executeQuery();
+    %>
 
+    <!-- '새 플레이리스트 추가' 버튼 -->
+    <div class="playlist-container">
+        <div class="plus-button" onclick="location.href='<%= request.getContextPath() %>/workspace/workspace_createplaylist.jsp'">
+            <span class="icon">+</span>
+        </div>
+
+        <%
+            // 플레이리스트 출력
+            while (rs.next()) {
+                int playlistId = rs.getInt("playlist_id");
+                String playlistTitle = rs.getString("playlist_title");
+        %>
+                <div class="playlist-card" onclick="location.href='<%= request.getContextPath() %>/workspace/workspace_edit_window.jsp?playlistTitle=<%= playlistTitle %>&playlistId=<%= playlistId %>'">
+                    <div class="thumbnail">
+                        <img src="thumnail.png" alt="썸네일 없음" />
+                    </div>
+                    <div class="card-content">
+                        <div class="title"><%= playlistTitle %></div>
+                    </div>
+                </div>
+        <%
+            }
+        %>
+    </div>
+
+    <%
+        } catch (Exception e) {
+            out.println("<p>DB 연동 오류: " + e.getMessage() + "</p>");
+        } finally {
+            // 리소스 정리
+            if (rs != null) try { rs.close(); } catch (Exception e) {}
+            if (pstmt != null) try { pstmt.close(); } catch (Exception e) {}
+            if (conn != null) try { conn.close(); } catch (Exception e) {}
+        }
+    %>
+</section>
