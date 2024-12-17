@@ -13,7 +13,7 @@ pageEncoding="UTF-8"%>
       <input type="button" value="뒤로 가기" onclick="history.back();" />
     </div>
     <center><h1>로그인</h1></center>
-    <form action="${pageContext.request.contextPath}/Login" method="post">
+	<form action="<%= request.getContextPath() %>/Login" method="post">
       <div class="table-wrapper">
         <table>
           <tr>
@@ -49,9 +49,7 @@ pageEncoding="UTF-8"%>
             <td colspan="2">
               <p>
                 계정이 없으신가요?
-                <a href="<%= request.getContextPath() %>/member/join.jsp"
-                  >회원가입</a
-                >
+				<a href="<%= request.getContextPath() %>/member/join.jsp">회원가입</a>
               </p>
             </td>
           </tr>
